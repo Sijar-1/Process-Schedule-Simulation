@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/lable1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="算    法:"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_dispatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@id/lable1"
+            android:text="时间片轮转算法"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/lable1"
+            android:layout_centerVertical="true"
+            android:text="已运行:"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/label2"
+            android:layout_alignBottom="@id/label2"
+            android:textSize="18sp"
+            android:text="0 秒"/>
+
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label2"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间片:"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/et_slot"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="18sp"
+                android:enabled="false"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(单位:秒)"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_choice"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_login_selector"
+            android:text="更改"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/btn_choice"
+            android:background="@drawable/btn_login_selector"
+            android:text="重置"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/lv_process"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_login_selector"
+            android:text="添加进程"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_login_selector"
+            android:text="开始"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+</LinearLayout>
