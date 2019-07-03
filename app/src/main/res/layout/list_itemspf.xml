@@ -5,7 +5,7 @@
     >
 
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/item_name3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -14,7 +14,7 @@
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/item_priority"
+        android:id="@+id/item_priority3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -23,7 +23,17 @@
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/item_need_time"
+        android:id="@+id/item_starttime3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:id="@+id/item_runtime3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -32,16 +42,7 @@
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/item_runtime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:id="@+id/item_state"
+        android:id="@+id/item_state3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

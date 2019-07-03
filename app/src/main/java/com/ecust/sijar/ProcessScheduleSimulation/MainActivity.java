@@ -3,10 +3,9 @@ package com.ecust.sijar.ProcessScheduleSimulation;
 
 import android.os.Bundle;
 
-import com.ecust.sijar.ProcessScheduleSimulation.fragment.FragmentTwo;
-import com.ecust.sijar.ProcessScheduleSimulation.R;
+import com.ecust.sijar.ProcessScheduleSimulation.fragment.fcfsFragment;
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.rrFragment;
-import com.ecust.sijar.ProcessScheduleSimulation.fragment.FragmentThree;
+import com.ecust.sijar.ProcessScheduleSimulation.fragment.spfFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +18,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     private rrFragment fragmentOne;
-    private com.ecust.sijar.ProcessScheduleSimulation.fragment.FragmentTwo fragmentTwo;
-    private FragmentThree fragmentThree;
+    private fcfsFragment fcfsFragment;
+    private spfFragment spfFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
     //init（）用来初始化组件
     private void init(){
         fragmentOne=new rrFragment();
-        fragmentTwo=new FragmentTwo();
-        fragmentThree=new FragmentThree();
+        fcfsFragment =new fcfsFragment();
+        spfFragment =new spfFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.content,fragmentOne).add(R.id.content,fragmentTwo).add(R.id.content,fragmentThree);//开启一个事务将fragment动态加载到组件
-        transaction.hide(fragmentOne).hide(fragmentTwo).hide(fragmentThree);//隐藏fragment
+        transaction.add(R.id.content,fragmentOne).add(R.id.content, fcfsFragment).add(R.id.content, spfFragment);//开启一个事务将fragment动态加载到组件
+        transaction.hide(fragmentOne).hide(fcfsFragment).hide(spfFragment);//隐藏fragment
         transaction.addToBackStack(null);//返回到上一个显示的fragment
         transaction.commit();//每一个事务最后操作必须是commit（），否则看不见效果
         showNav(R.id.navigation_rr);
@@ -77,20 +76,20 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch (navid){
             case R.id.navigation_rr:
-                transaction.hide(fragmentTwo).hide(fragmentThree);
+                transaction.hide(fcfsFragment).hide(spfFragment);
                 transaction.show(fragmentOne);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.navigation_fcfs:
-                transaction.hide(fragmentOne).hide(fragmentThree);
-                transaction.show(fragmentTwo);
+                transaction.hide(fragmentOne).hide(spfFragment);
+                transaction.show(fcfsFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.navigation_spf:
-                transaction.hide(fragmentTwo).hide(fragmentOne);
-                transaction.show(fragmentThree);
+                transaction.hide(fcfsFragment).hide(fragmentOne);
+                transaction.show(spfFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;

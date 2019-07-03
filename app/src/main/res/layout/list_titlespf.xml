@@ -6,43 +6,42 @@
     >
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_name3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="进程名"
+        android:text="Name"
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/tv_priority"
+        android:id="@+id/tv_priority3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="优先级"
+        android:text="Priority"
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/tv_needtime"
+        android:id="@+id/tv_starttime3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="需要时间"
+        android:text="StartTime"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tv_runtime3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="RunTime"
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/tv_runtime"
+        android:id="@+id/tv_state3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="已运行时间"
-        android:layout_weight="1"/>
-
-    <TextView
-        android:id="@+id/tv_state"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="状态"
+        android:text="state"
         android:layout_weight="1"/>
 
 </LinearLayout>

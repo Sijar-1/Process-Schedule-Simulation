@@ -11,11 +11,16 @@ import androidx.fragment.app.Fragment;
 import com.ecust.sijar.ProcessScheduleSimulation.R;
 
 
-public class FragmentTwo extends Fragment {
+public class spfFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_two, container, false);
+        View view = inflater.inflate(R.layout.spf, container, false);
         return view;
+
+
+
+
+
     }
 }

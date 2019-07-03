@@ -99,7 +99,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/list_title"
+        layout="@layout/list_titlespf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
