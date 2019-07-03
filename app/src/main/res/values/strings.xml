@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ProcessScheduleSimulation</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">优先级</string>
+    <string name="title_rr">时间片轮转</string>
+    <string name="title_fcfs">先来先服务</string>
+    <string name="title_spf">优先级</string>
 </resources>

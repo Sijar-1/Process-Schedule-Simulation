@@ -28,17 +28,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_rr:
 
-                    showNav(R.id.navigation_home);
+                    showNav(R.id.navigation_rr);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_fcfs:
 
-                    showNav(R.id.navigation_dashboard);
+                    showNav(R.id.navigation_fcfs);
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_spf:
 
-                    showNav(R.id.navigation_notifications);
+                    showNav(R.id.navigation_spf);
                     return true;
             }
             return false;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.hide(fragmentOne).hide(fragmentTwo).hide(fragmentThree);//隐藏fragment
         transaction.addToBackStack(null);//返回到上一个显示的fragment
         transaction.commit();//每一个事务最后操作必须是commit（），否则看不见效果
-        showNav(R.id.navigation_home);
+        showNav(R.id.navigation_rr);
     }
 
 
@@ -76,19 +76,19 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch (navid){
-            case R.id.navigation_home:
+            case R.id.navigation_rr:
                 transaction.hide(fragmentTwo).hide(fragmentThree);
                 transaction.show(fragmentOne);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-            case R.id.navigation_dashboard:
+            case R.id.navigation_fcfs:
                 transaction.hide(fragmentOne).hide(fragmentThree);
                 transaction.show(fragmentTwo);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_spf:
                 transaction.hide(fragmentTwo).hide(fragmentOne);
                 transaction.show(fragmentThree);
                 transaction.addToBackStack(null);
