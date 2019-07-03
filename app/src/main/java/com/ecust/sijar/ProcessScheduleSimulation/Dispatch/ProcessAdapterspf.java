@@ -13,7 +13,7 @@ import com.ecust.sijar.ProcessScheduleSimulation.R;
 import java.util.List;
 
 /**
- * Created by wjb on 2016/6/4.
+ * Created by Sijar on 2019/7/3.
  * 进程列表设配器
  */
 public class ProcessAdapterspf extends BaseAdapter{

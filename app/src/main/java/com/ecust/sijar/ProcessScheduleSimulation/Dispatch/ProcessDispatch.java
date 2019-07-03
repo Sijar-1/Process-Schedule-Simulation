@@ -4,7 +4,7 @@ package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 import java.util.List;
 
 /**
- * Created by wjb on 2016/6/5.
+ * Created by Sijar on 2019/7/3.
  * 调度算法的抽象父类
  */
 public abstract class ProcessDispatch  {

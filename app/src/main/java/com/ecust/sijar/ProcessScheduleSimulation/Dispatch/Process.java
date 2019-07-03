@@ -2,7 +2,7 @@ package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
 import java.util.List;
 /**
- * Created by wjb on 2016/6/4.
+ * Created by Sijar on 2019/7/3.
  * PCB信息对象类
  */
 public class Process implements Cloneable{

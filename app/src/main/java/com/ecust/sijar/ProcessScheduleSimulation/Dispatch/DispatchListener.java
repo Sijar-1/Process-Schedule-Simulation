@@ -1,8 +1,8 @@
 package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
 /**
- * Created by wjb on 2016/6/5.
- */
+ * Created by Sijar on 2019/7/3.
+ **/
 public interface DispatchListener {
 
     // 返回进行时间
