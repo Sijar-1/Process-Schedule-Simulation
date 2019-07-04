@@ -10,7 +10,10 @@ public class Process implements Cloneable{
     private String name="未命名";    //进程标识符
     private int priority=10;          //进程优先数
     private int round=1;             //进程轮转时间片
-    private int runTime=0;           //进程占用CPU时间
+    private int runTime=0;           //进程运行时间（动态的）
+    private int CPUTime=1;           //进程占用CPU时间（不变的）
+    private int IOstartTime=0;         //I/O相对CPU开始时间
+    private int IOtime=0;            //I/O持续时间
     private int count=0;            //计数器
     private int needTime=0;          //进程到完成还要的CPU时间（按课程设计表示的意思）
     private String state="就绪";       //进程状态
@@ -50,6 +53,30 @@ public class Process implements Cloneable{
         this.runTime = runTime;
     }
 
+    public int getCPUTime() {
+        return CPUTime;
+    }
+
+    public void setCPUTime(int CPUTime) {
+        this.CPUTime = CPUTime;
+    }
+
+    public int getIOstartTime() {
+        return IOstartTime;
+    }
+
+    public int getIOtime() {
+        return IOtime;
+    }
+
+    public void setIOtime(int IOtime) {
+        this.IOtime = IOtime;
+    }
+
+    public void setIOstartTime(int IOstartTime) {
+        this.IOstartTime = IOstartTime;
+    }
+
     public int getCount() { return count; }
     public void setCount(int count) { this.count = count; }
 
@@ -87,6 +114,9 @@ public class Process implements Cloneable{
             p.priority = this.priority;
             p.round=this.round;
             p.runTime = this.runTime;
+            p.CPUTime=this.CPUTime;
+            p.IOstartTime=this.IOstartTime;
+            p.IOtime=this.IOtime;
             p.count=this.count;
             p.needTime = this.needTime;
             p.state = this.state;

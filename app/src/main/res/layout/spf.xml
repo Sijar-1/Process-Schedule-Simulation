@@ -50,37 +50,33 @@
             android:textSize="18sp" />
 
 
-        <LinearLayout
-            android:id="@+id/layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/label2"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical">
-
-        </LinearLayout>
-
         <Button
-            android:id="@+id/btn_choice"
-            android:layout_width="65dp"
+            android:id="@+id/btn_chart"
+            android:layout_width="83dp"
             android:layout_height="32dp"
-            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/lable1"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="39dp"
-            android:layout_marginRight="320dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginRight="322dp"
             android:background="@drawable/btn_login_selector"
-            android:text="更改"
+            android:text="图表"
             android:textColor="#ffffff"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_reset"
-            android:layout_width="65dp"
+            android:layout_width="83dp"
             android:layout_height="32dp"
-            android:layout_below="@id/btn_choice"
+            android:layout_alignStart="@+id/btn_chart"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="-33dp"
-            android:layout_marginRight="234dp"
+            android:layout_marginStart="106dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginRight="200dp"
             android:background="@drawable/btn_login_selector"
             android:text="重置"
             android:textColor="#ffffff"
