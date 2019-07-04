@@ -39,7 +39,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_runtime"
+            android:id="@+id/tv_allruntime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/label2"
@@ -51,7 +51,7 @@
 
 
         <Button
-            android:id="@+id/btn_chart"
+            android:id="@+id/btn_chartpri"
             android:layout_width="83dp"
             android:layout_height="32dp"
             android:layout_alignTop="@+id/lable1"
@@ -66,10 +66,10 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btn_reset"
+            android:id="@+id/btn_resetpri"
             android:layout_width="83dp"
             android:layout_height="32dp"
-            android:layout_alignStart="@+id/btn_chart"
+            android:layout_alignStart="@+id/btn_chartpri"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -85,7 +85,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/list_titlespf"
+        layout="@layout/list_titlepri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -103,7 +103,7 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_addpri"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -114,7 +114,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_startpri"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

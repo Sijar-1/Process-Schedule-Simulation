@@ -16,12 +16,12 @@ import java.util.List;
  * Created by Sijar on 2019/7/3.
  * 进程列表设配器
  */
-public class ProcessAdapterspf extends BaseAdapter{
+public class ProcessAdapterPri extends BaseAdapter{
 
     private Context context;
     private List<Process> processList;
 
-    public ProcessAdapterspf(Context context, List<Process> list){
+    public ProcessAdapterPri(Context context, List<Process> list){
         this.context = context;
         processList = list;
     }
@@ -42,7 +42,7 @@ public class ProcessAdapterspf extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View root = LayoutInflater.from(context).inflate(R.layout.list_itemspf,null);
+        View root = LayoutInflater.from(context).inflate(R.layout.list_itempri,null);
         TextView tvName = (TextView) root.findViewById(R.id.item_name3);
         TextView tvPriority = (TextView) root.findViewById(R.id.item_priority3);
       //  TextView tvRound=(TextView)root.findViewById(R.id.item_round);

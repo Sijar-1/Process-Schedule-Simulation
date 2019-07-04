@@ -15,18 +15,30 @@ public class Process implements Cloneable{
     private int IOstartTime=0;         //I/O相对CPU开始时间
     private int IOtime=0;            //I/O持续时间
     private int count=0;            //计数器
-    private int needTime=0;          //进程到完成还要的CPU时间（按课程设计表示的意思）
+    private int runCPUtime=0;          //进程运行了的CPU时间
     private String state="就绪";       //进程状态
     private int startTime = 0;      //进程开始时间
     private int endTime = 0;         //进程结束时间  ，可以不要
     private List<Process> next;    //链指针
 
-    public Process(String name,int priority,int needTime){
+    public Process(String name,int startTime,int runTime){
         this.name = name;
-        this.priority = priority;
-        this.needTime = needTime;
+        this.startTime=startTime;
+        this.runTime = runTime;
     }
 
+    public Process(int round,String name,int startTime,int runTime){
+        this.name = name;
+        this.round = round;
+        this.startTime=startTime;
+        this.runTime = runTime;
+    }
+    public Process(String name,int priority,int x,int startTime,int runTime){
+        this.name = name;
+        this.priority = priority;
+        this.startTime=startTime;
+        this.runTime = runTime;
+    }
     public String getName() {
         return name;
     }
@@ -44,7 +56,10 @@ public class Process implements Cloneable{
     public int getRound() {
         return round;
     }
-    public void setRound(int round) { this.round = round; }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
 
     public int getRunTime() {
         return runTime;
@@ -80,8 +95,13 @@ public class Process implements Cloneable{
     public int getCount() { return count; }
     public void setCount(int count) { this.count = count; }
 
-    public int getNeedTime() { return needTime; }
-    public void setNeedTime(int needTime) { this.needTime = needTime; }
+    public int getRunCPUtime() {
+        return runCPUtime;
+    }
+
+    public void setRunCPUtime(int runCPUtime) {
+        this.runCPUtime = runCPUtime;
+    }
 
     public String getState() {
         return state;
@@ -118,7 +138,7 @@ public class Process implements Cloneable{
             p.IOstartTime=this.IOstartTime;
             p.IOtime=this.IOtime;
             p.count=this.count;
-            p.needTime = this.needTime;
+            p.runCPUtime = this.runCPUtime;
             p.state = this.state;
             p.startTime = this.startTime;
             p.endTime = this.endTime;

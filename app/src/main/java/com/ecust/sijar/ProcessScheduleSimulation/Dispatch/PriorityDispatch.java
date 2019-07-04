@@ -41,7 +41,7 @@ public class PriorityDispatch extends ProcessDispatch {
                     processList.get(index).setRunTime(processList.get(index).getRunTime() + 1);
 
                     // 如果达到需要时间，则设置检查状态为完成
-                    if (processList.get(index).getRunTime() >= processList.get(index).getNeedTime()) {
+                    if (processList.get(index).getRunTime() >= processList.get(index).getRunCPUtime()) {   //  if (processList.get(index).getRunTime() >= processList.get(index).getNeedTime())   _Sijar
                         processList.get(index).setState("完成");
                         processList.get(index).setEndTime(time);
                         index++;
