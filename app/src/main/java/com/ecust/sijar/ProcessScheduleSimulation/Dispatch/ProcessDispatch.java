@@ -2,6 +2,7 @@ package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -20,12 +21,13 @@ public abstract class ProcessDispatch {
     protected int length;
     protected int time;
     protected LinkedList<Process> list;
+    protected List<Process> listRR;   //RR新增
 
     // 抽象方法：启动线程
     public abstract void startThread(LinkedList<Process> l);
 
     // 抽象方法：有时间片的启动线程
-    public abstract void startThread(LinkedList<Process> l, int slot);
+    public abstract void startThread(List<Process> l, int slot);
 
     // 注册监听器
     public void setDispatchListener(DispatchListener listener) {

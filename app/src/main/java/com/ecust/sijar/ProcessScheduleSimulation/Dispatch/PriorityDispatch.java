@@ -7,6 +7,7 @@ import android.os.Message;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -19,8 +20,8 @@ public class PriorityDispatch extends ProcessDispatch {
     private LinkedList<Process> processList;
     //抽象方法：启动线程,写入当前总运行时间
     @Override
-    public void startThread(LinkedList<Process> l ,int time1) {
-        list = l;
+    public void startThread(List<Process> l , int time1) {
+        listRR = l;
         index = 0;
         time = time1;
         lock = true;
