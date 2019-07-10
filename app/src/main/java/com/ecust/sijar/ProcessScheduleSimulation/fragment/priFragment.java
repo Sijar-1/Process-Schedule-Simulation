@@ -32,6 +32,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
     private Button btn_add_pri; //添加进程按钮
     private Button btnReset;   //重置按钮
     private int nowTime = 0;
+    protected int mlock = 0;   //用于判断是不是第一次开始
     private ProcessAdapterPri processAdapter = null;
     private ProcessDispatch dispatchMathod;
     private LinkedList<Process> processList = new LinkedList<Process>();
@@ -58,42 +59,64 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
         lvProcess.setAdapter(processAdapter);
         lvProcess.setOnItemClickListener(this);
 
-        button_start_timer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("priority", "start.click");
-                String str = button_start_timer.getText().toString();//获取按钮字符串
-                if(str.equals("开始")){ //切换按钮文字
-                    button_start_timer.setText("暂停");
-                    // 线程未启动时，执行方法体，避免创建多个进程
-                    if(!dispatchMathod.isRunning()) {
-
-                        // 注册监听器
-                        dispatchMathod.setDispatchListener(new DispatchListener() {
-                            @Override
-                            public void nowTime(int s) {
-                                nowTime = s;
-                                tvRuntime.setText(s+" 秒");
-                                processAdapter.notifyDataSetChanged();  //会记住划到的位置，重新加载数据时不会改变位置只改变数据
-                            }
-                        });
-
-                        // 启动线程
-                        dispatchMathod.startThread(processList,nowTime);
-                      //  button_start_timer.setEnabled(false);
-                    }
-
-                }
-                else{
-                    button_start_timer.setText("开始");
-                }
-            }
-        });
-
+        //添加进程
         btn_add_pri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             showDialog();
+                //添加进程时阻塞线程
+                if(dispatchMathod.isRunning()){
+                    dispatchMathod.pause();
+                }
+                button_start_timer.setText("开始");  //开始
+                showDialog();
+            }
+        });
+
+        button_start_timer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 开始按钮 第一次执行，在开始或者是重置后方可运行
+                if(mlock==0){
+                    String str = button_start_timer.getText().toString();//获取按钮字符串
+                    if(str.equals("开始")){ //切换按钮文字
+                        button_start_timer.setText("暂停");
+                        // 线程未启动时，执行方法体，避免创建多个进程
+                        if(!dispatchMathod.isRunning()) {
+                            // 先备份进程列表数据
+                            copyList();
+                            // 注册监听器
+                            dispatchMathod.setDispatchListener(new DispatchListener() {
+                                @Override
+                                public void nowTime(int s) {
+                                    nowTime = s;
+                                    tvRuntime.setText(s+" 秒");
+                                    processAdapter.notifyDataSetChanged();  //会记住划到的位置，重新加载数据时不会改变位置只改变数据
+                                }
+                            });
+                            // 启动线程
+                            dispatchMathod.startThread(processList);
+                            mlock=1;
+                        }
+                    }
+                }   //if （mlock==0） -end
+                else{
+                    if(mlock==1){
+                        button_start_timer.setText("开始");
+                        mlock=2;
+                        // 阻塞线程
+                        if(dispatchMathod.isRunning()){
+                            dispatchMathod.pause();
+                        }
+                    }   //if （mlock==1） -end
+                    else{   //继续
+                        button_start_timer.setText("暂停");
+                        mlock=1;
+                        // 如果线程还存在，则唤醒线程
+                        if(dispatchMathod.isRunning()){
+                            dispatchMathod.start();
+                        }
+                    }
+                }
             }
         });
 
@@ -104,16 +127,21 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
             public void onClick(View view) {
                 // 先终止线程
                 dispatchMathod.stop();
-                processAdapter.notifyDataSetChanged();
-                tvRuntime.setText("0 秒");
-                nowTime = 0;
-                processList.clear();
-                initData();
+                if (copyList.size() > 0) {
+                    processList.clear();
+                    //备份数据
+                    for (Process p : copyList) {
+                        processList.add(p);
+                    }
+                    processAdapter.notifyDataSetChanged();
+                    tvRuntime.setText("0 秒");
+                    nowTime = 0;
+                }
+                mlock=0;   //开始
+                button_start_timer.setText("开始");
                 Log.d("priority", "reset.click");
             }
         });
-
-
         return view;
 
     }// onCreateView-end
@@ -185,8 +213,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                     }
                 }
 
-                // 若是优先级调度，需调整优先级列表
-
+                // 优先级调度，需调整优先级列表
                     dispatchMathod.InsertProcess(process);
 
                 // 如果线程还存在，则唤醒线程
@@ -195,7 +222,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                 }
             }//onClick end
         });
-    }
+    }  //showDialog（）-end
 
 
     // 开始时数据
@@ -210,8 +237,6 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
         processList.add(p);
         p = new Process(7,"e",7,5,0,0);
         processList.add(p);
-        // 先备份进程列表数据
-     //   copyList();
     }
 
     // 备份数据
