@@ -1,6 +1,6 @@
 package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
-import java.util.List;
+import java.util.LinkedList;
 /**
  * Created by Sijar on 2019/7/3.
  * PCB信息对象类
@@ -19,25 +19,31 @@ public class Process implements Cloneable{
     private String state="就绪";       //进程状态
     private int startTime = 0;      //进程开始时间
     private int endTime = 0;         //进程结束时间  ，可以不要
-    private List<Process> next;    //链指针
-
-    public Process(String name,int startTime,int runTime){
+//先来先服务算法创建进程
+    public Process(String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
         this.name = name;
         this.startTime=startTime;
-        this.runTime = runTime;
+        this.CPUTime = CPUTime;
+        this.IOstartTime=IOstartTime;
+        this.IOtime=IOtime;
     }
-
-    public Process(int round,String name,int startTime,int runTime){
+//时间片轮转算法创建进程
+    public Process(String name,int round,int startTime,int CPUTime,int IOstartTime,int IOtime){
         this.name = name;
         this.round = round;
         this.startTime=startTime;
-        this.runTime = runTime;
+        this.CPUTime = CPUTime;
+        this.IOstartTime=IOstartTime;
+        this.IOtime=IOtime;
     }
-    public Process(String name,int priority,int x,int startTime,int runTime){
+    //优先级算法创建进程
+    public Process(int priority,String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
         this.name = name;
         this.priority = priority;
         this.startTime=startTime;
-        this.runTime = runTime;
+        this.CPUTime = CPUTime;
+        this.IOstartTime=IOstartTime;
+        this.IOtime=IOtime;
     }
     public String getName() {
         return name;
@@ -124,10 +130,9 @@ public class Process implements Cloneable{
         this.startTime = startTime;
     }
 
-    public List<Process> getNext() { return next; }
-    public void setNext(List<Process> next) { this.next = next; }
+
     @Override
-    protected Process clone() throws CloneNotSupportedException {
+    public Process clone() throws CloneNotSupportedException {
         try {
             Process p = (Process) super.clone();
             p.name = this.name;
@@ -142,7 +147,7 @@ public class Process implements Cloneable{
             p.state = this.state;
             p.startTime = this.startTime;
             p.endTime = this.endTime;
-            p.next=this.next;
+
             return p;
         }catch (Exception e){
 

@@ -6,7 +6,8 @@ import android.os.Message;
 //import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+
 
 /**
  * Created by Sijar on 2019/7/3.
@@ -15,13 +16,13 @@ import java.util.List;
 public class PriorityDispatch extends ProcessDispatch {
 
     // 按优先级排列的进程列表
-    private List<Process> processList;
-
+    private LinkedList<Process> processList;
+    //抽象方法：启动线程,写入当前总运行时间
     @Override
-    public void startThread(List<Process> l) {
+    public void startThread(LinkedList<Process> l ,int time1) {
         list = l;
         index = 0;
-        time = 0;
+        time = time1;
         lock = true;
         isRunning = false;
         // 初始化优先级进程列表
@@ -65,15 +66,15 @@ public class PriorityDispatch extends ProcessDispatch {
         });
         thread.start();
     }
-
+    //抽象方法：启动线程
     @Override
-    public void startThread(List<Process> l, int slot) {
+   public void startThread(LinkedList<Process> l ) {
         startThread(l);
     }
 
     private void initPriorityList() {
 
-        processList = new ArrayList<>();
+        processList = new LinkedList<>();
         processList.add(list.get(0));
 
         // 从列表尾向头遍历，按优先级大小，选择合适的位置插入
