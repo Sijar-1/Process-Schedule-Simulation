@@ -19,6 +19,7 @@ public class Process implements Cloneable{
     private String state="就绪";       //进程状态
     private int startTime = 0;      //进程开始时间
     private int endTime = 0;         //进程结束时间  ，可以不要
+    private int realstartTime;        //真正开始运行时间
 //先来先服务算法创建进程
     public Process(String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
         this.name = name;
@@ -130,6 +131,13 @@ public class Process implements Cloneable{
         this.startTime = startTime;
     }
 
+    public int getRealstartTime() {
+        return realstartTime;
+    }
+
+    public void setRealstartTime(int realstartTime) {
+        this.realstartTime = realstartTime;
+    }
 
     @Override
     public Process clone() throws CloneNotSupportedException {
@@ -147,7 +155,7 @@ public class Process implements Cloneable{
             p.state = this.state;
             p.startTime = this.startTime;
             p.endTime = this.endTime;
-
+            p.realstartTime=this.realstartTime;
             return p;
         }catch (Exception e){
 
