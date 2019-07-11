@@ -435,7 +435,7 @@ public class PriorityDispatch extends ProcessDispatch {
        blockedL=new LinkedList<Process>();
        copyTmp(waitL,0);
        copyTmp(blockedL,1);
-        //迭代器
+        //迭代器 
         for (Process p: waitL) {
             if (p.getStartTime() == time) {
                 p.setState("就绪");
