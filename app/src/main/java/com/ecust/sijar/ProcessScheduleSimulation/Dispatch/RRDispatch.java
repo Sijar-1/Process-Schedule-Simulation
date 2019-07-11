@@ -81,7 +81,7 @@ public class RRDispatch extends ProcessDispatch {
 
                             } else {
                                 // 如果达到需要时间，则设置进程状态为完成
-                                if (mReadyQueue.get(index).getRunCPUtime() + mReadyQueue.get(index).getIOtime() >= mReadyQueue.get(index).getCPUTime()) {
+                                if (mReadyQueue.get(index).getRunCPUtime() + mReadyQueue.get(index).getRunIOtime() >= mReadyQueue.get(index).getCPUTime()) {
 
                                     reflesh(index, listIndex, "完成");
 
@@ -134,8 +134,6 @@ public class RRDispatch extends ProcessDispatch {
 
             handler.sendEmptyMessage(1000);
         }
-
-
     }
 
     /**
