@@ -129,15 +129,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <Button
         android:id="@+id/btn_dialog_surerr"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_below="@id/tv_dialog_IOlastrr"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_login_selector"
         android:text="@string/btn_add"
         android:textSize="16sp"
         android:textColor="#ffffff"/>
+
+    <Button
+        android:id="@+id/btn_dialog_cancelrr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_login_selector"
+        android:text="@string/cancel"
+        android:textSize="16sp"
+        android:textColor="#ffffff"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -25,7 +25,7 @@ public class ProcessAdapterRR extends BaseAdapter {
 
     // 通过构造方法将数据源与数据适配器关联起来
     // context:要使用当前的Adapter的界面对象
-    public ProcessAdapterRR(Context context, List<Process> list){
+    public ProcessAdapterRR(Context context, List<Process> list) {
 
         this.context = context;
         processList = list;
@@ -54,7 +54,7 @@ public class ProcessAdapterRR extends BaseAdapter {
     //返回每一项的显示内容
     public View getView(int i, View view, ViewGroup viewGroup) {
         //将布局文件转化为View对象
-        View root = LayoutInflater.from(context).inflate(R.layout.list_item_rr,null);
+        View root = LayoutInflater.from(context).inflate(R.layout.list_item_rr, null);
         TextView tvName = (TextView) root.findViewById(R.id.item_namerr);
         TextView tvProcessTime = (TextView) root.findViewById(R.id.item_process_timerr);  //进程  开始：持续
         TextView tvIOtime = (TextView) root.findViewById(R.id.item_IOtimerr);  //IO  开始：持续
@@ -64,21 +64,24 @@ public class ProcessAdapterRR extends BaseAdapter {
         TextView tvState = (TextView) root.findViewById(R.id.item_staterr);
 
         tvName.setText(processList.get(i).getName());
-        tvProcessTime.setText(processList.get(i).getStartTime()+":"+processList.get(i).getCPUTime());
-        tvIOtime.setText(processList.get(i).getIOstartTime()+":"+processList.get(i).getIOtime());
-        tvCPU.setText(processList.get(i).getRunCPUtime()+"");
-        tvIO.setText(processList.get(i).getRunIOtime()+"");
-        tvTotal.setText(processList.get(i).getEndTime()+"");
+        tvProcessTime.setText(processList.get(i).getStartTime() + ":" + processList.get(i).getCPUTime());
+        tvIOtime.setText(processList.get(i).getIOstartTime() + ":" + processList.get(i).getIOtime());
+        tvCPU.setText(processList.get(i).getRunCPUtime() + "");
+        tvIO.setText(processList.get(i).getRunIOtime() + "");
+        tvTotal.setText(processList.get(i).getEndTime() + "");
         tvState.setText(processList.get(i).getState());
 
-        if(processList.get(i).getState().equals("进行")){
+        //如果进程状态变为“进行”，则该行颜色变为绿色
+        if (processList.get(i).getState().equals("进行")) {
             root.setBackgroundColor(Color.parseColor("#D1EEEE"));
         }
-        if(processList.get(i).getState().equals("就绪")
-                ||processList.get(i).getState().equals("完成")){
+        //如果进程状态变为“就绪”或者是“完成”，则该行颜色变为白色
+        if (processList.get(i).getState().equals("就绪")
+                || processList.get(i).getState().equals("完成")) {
             root.setBackgroundColor(Color.WHITE);
         }
-        if(processList.get(i).getState().equals("阻塞")){
+        //如果进程状态变为“阻塞”，则该行颜色变为红色
+        if (processList.get(i).getState().equals("阻塞")) {
             root.setBackgroundColor(Color.parseColor("#FFC0CB"));
         }
 

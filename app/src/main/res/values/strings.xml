@@ -3,7 +3,6 @@
     <string name="title_rr">时间片轮转</string>
     <string name="title_fcfs">先来先服务</string>
     <string name="title_spf">优先级</string>
-
     <string name="lable_algorithm">算&#160; &#160; 法:</string>
     <string name="rr_algorithm">时间片轮转算法</string>
     <string name="lable_runtimeAll">已运行:</string>
@@ -30,6 +29,7 @@
     <string name="tv_add_IOstart">IO开始时间</string>
     <string name="tv_add_IOlast">IO持续时间</string>
     <string name="btn_add">添加</string>
+    <string name="cancel">取消</string>
 
 
 </resources>
