@@ -21,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
-import java.util.List;
-
 
 public class priFragment extends Fragment implements AdapterView.OnItemClickListener{
 
@@ -75,11 +73,10 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
         button_start_timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String str = button_start_timer.getText().toString();//获取按钮字符串
                 // 开始按钮 第一次执行，在开始或者是重置后方可运行
                 if(mlock==0){
-                    String str = button_start_timer.getText().toString();//获取按钮字符串
                     if(str.equals("开始")){ //切换按钮文字
-                        button_start_timer.setText("暂停");
                         // 线程未启动时，执行方法体，避免创建多个进程
                         if(!dispatchMathod.isRunning()) {
                             // 先备份进程列表数据
@@ -96,6 +93,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                             // 启动线程
                             dispatchMathod.startThread(processList);
                             mlock=1;
+                            button_start_timer.setText("暂停");
                         }
                     }
                 }   //if （mlock==0） -end
@@ -227,7 +225,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
 
     // 开始时数据
     private void initData(){
-        Process p = new Process(5,"a",3,3,0,0);
+        Process p = new Process(5,"a",0,3,1,1);
         processList.add(p);
         p = new Process(3,"b",4,7,0,0);
         processList.add(p);

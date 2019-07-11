@@ -20,7 +20,7 @@ public abstract class ProcessDispatch {
     protected int index;
     protected int length;
     protected int time;
-    protected LinkedList<Process> list;
+    protected LinkedList<Process> list;   //所有进程的队列
     protected List<Process> listRR;   //RR新增
 
     // 抽象方法：启动线程
