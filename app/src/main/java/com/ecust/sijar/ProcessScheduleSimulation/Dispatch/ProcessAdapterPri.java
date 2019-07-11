@@ -51,15 +51,17 @@ public class ProcessAdapterPri extends BaseAdapter{
         View root = LayoutInflater.from(context).inflate(R.layout.list_itempri,null);
         TextView tvName = (TextView) root.findViewById(R.id.item_name3);
         TextView tvPriority = (TextView) root.findViewById(R.id.item_priority3);
-        TextView tvRuntime = (TextView) root.findViewById(R.id.item_runtime3);  //cpu时间
+        TextView tvCPUtime = (TextView) root.findViewById(R.id.item_CPUtime3);  //cpu时间
+        TextView tvIOtime = (TextView) root.findViewById(R.id.item_IOtime3);  //IO时间
+        TextView tvEndTime=(TextView) root.findViewById(R.id.item_endtime3) ;
         TextView tvState = (TextView) root.findViewById(R.id.item_state3);
         TextView tvStartTime = (TextView) root.findViewById(R.id.item_starttime3);
 
         tvName.setText(processList.get(i).getName());
         tvPriority.setText(processList.get(i).getPriority()+"");
-     //   tvRound.setText(processList.get(i).getRound()+"s");
-        tvRuntime.setText(processList.get(i).getCPUTime()+"");
-     //   tvNeedTime.setText(processList.get(i).getNeedTime()+"s");
+        tvCPUtime.setText(processList.get(i).getCPUTime()+"");
+        tvIOtime.setText(processList.get(i).getIOtime()+"");
+        tvEndTime.setText(processList.get(i).getEndTime()+"");
         tvState.setText(processList.get(i).getState());
         tvStartTime.setText(processList.get(i).getStartTime()+"");
         if(processList.get(i).getState().equals("进行")){
