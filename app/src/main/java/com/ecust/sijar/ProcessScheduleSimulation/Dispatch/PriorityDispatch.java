@@ -48,51 +48,128 @@ public class PriorityDispatch extends ProcessDispatch {
             public void run() {
                 // 初始化优先级进程就绪列表,只在最开始运行一次
                 initPriorityList1();
+                Log.d("rr", "initPriorityList1之后队列--------------开始"+time+"-----------");
+                Log.d("pri", "等待队列");
+                for (Process p : waitList) {
+                    Log.d("rr", p.getName()+" starttime="+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+"::runiotime="+p.getRunIOtime()+":::runcputime:="+p.getRunCPUtime()+" state="+p.getState());
+                }
+
+                Log.d("rr", "就绪队列");
+                for (Process p : processReadyList) {
+                    Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                }
+
+                Log.d("rr", "阻塞队列");
+                for (Process p : blockedList) {
+                    Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                }
+                Log.d("rr", "原始队列");
+                for (Process p : list) {
+                    Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                }
+                Log.d("rr", "initPriorityList1之后队列---------------------结束---------");
                 isRunning = true;
                 while (lock) {
                     // 检查是否阻塞
                     pauseThread();
                     block();
+                    Log.d("rr", "block之后队列--------------开始"+time+"-----------");
+                    Log.d("pri", "等待队列");
+                    for (Process p : waitList) {
+                        Log.d("rr", p.getName()+" starttime="+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+"::runiotime="+p.getRunIOtime()+":::runcputime:="+p.getRunCPUtime()+" state="+p.getState());
+                    }
+
+                    Log.d("rr", "就绪队列");
+                    for (Process p : processReadyList) {
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+
+                    Log.d("rr", "阻塞队列");
+                    for (Process p : blockedList) {
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+                    Log.d("rr", "原始队列");
+                    for (Process p : list) {
+                        Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+                    Log.d("rr", "block之后队列---------------------结束---------");
                     if(processReadyList.size()!=0){
-                        listIndex=find(index);
+                        listIndex=find(index);//listIndex为对应的原始list里的index
                         changeState(index,listIndex,"进行");
+                        Log.d("rr", "判断进行之后队列--------------开始"+time+"-----------");
+                        Log.d("pri", "等待队列");
+                        for (Process p : waitList) {
+                            Log.d("rr", p.getName()+" starttime="+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+"::runiotime="+p.getRunIOtime()+":::runcputime:="+p.getRunCPUtime()+" state="+p.getState());
+                        }
+
+                        Log.d("rr", "就绪队列");
+                        for (Process p : processReadyList) {
+                            Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                        }
+
+                        Log.d("rr", "阻塞队列");
+                        for (Process p : blockedList) {
+                            Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                        }
+                        Log.d("rr", "原始队列");
+                        for (Process p : list) {
+                            Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                        }
+                        Log.d("rr", "判断进行之后队列---------------------结束---------");
                         //如果到了IO请求，阻塞
-                        Log.d("pri","processready_________________________--------------------start "+time);
-                        Log.d("pri",processReadyList.get(index).getName()+"(name)  start=  "
-                                +processReadyList.get(index).getStartTime()+" runCPUT="+processReadyList.get(index).getRunCPUtime()+
-                                " cputime="+processReadyList.get(index).getCPUTime()+" iostart="+processReadyList.get(index).getIOstartTime()+" state="+processReadyList.get(index).getState()+" index="+index+" listIndex="+listIndex);
-                        Log.d("pri","processready_________________________--------------------end ");
                         if (processReadyList.get(index).getIOstartTime() == processReadyList.get(index).getRunCPUtime()&&processReadyList.get(index).getIOtime()!=0) {
                             changeState(index, listIndex, "阻塞");
                         } else
                             if (processReadyList.get(index).getRunCPUtime()>= processReadyList.get(index).getCPUTime()) {
                                 changeState(index, listIndex, "完成");
                             }
+
                     }
                     time++;//已运行时间加一
-                    Log.d("rr", "队列--------------开始"+time+"----------------------------");
+                    Log.d("rr", "队列----判断完阻塞和完成了----------开始"+time+"---------------------------------------------------------------------------------------");
                     Log.d("pri", "等待队列");
                     for (Process p : waitList) {
-                        Log.d("rr", p.getName()+" start"+p.getStartTime()+"::runiotime"+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                        Log.d("rr", p.getName()+" starttime="+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+"::runiotime="+p.getRunIOtime()+":::runcputime:="+p.getRunCPUtime()+" state="+p.getState());
                     }
 
                     Log.d("rr", "就绪队列");
                     for (Process p : processReadyList) {
-                        Log.d("rr", p.getName()+" start"+p.getStartTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
                     }
 
                     Log.d("rr", "阻塞队列");
                     for (Process p : blockedList) {
-                        Log.d("rr", p.getName()+" start"+p.getStartTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
                     }
                     Log.d("rr", "原始队列");
                     for (Process p : list) {
-                        Log.d("pri", p.getName()+" start"+p.getStartTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                        Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+                    Log.d("rr", "队列----------------------结束-----------------------------------------------------------------------------------");
+
+                    addReadyBlock();//更新，已到开始时间的都加到就绪队列里，IO完成后的也加到就绪队列里
+
+                    Log.d("rr", "队列----更新了addreadyblock---------开始"+time+"---------------------------------------------------------------------------------------");
+                    Log.d("pri", "等待队列");
+                    for (Process p : waitList) {
+                        Log.d("rr", p.getName()+" starttime="+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+"::runiotime="+p.getRunIOtime()+":::runcputime:="+p.getRunCPUtime()+" state="+p.getState());
                     }
 
-                    Log.d("rr", "队列----------------------结束--------------------");
+                    Log.d("rr", "就绪队列");
+                    for (Process p : processReadyList) {
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+"::::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                    }
 
-                    addReadyBlock();
+                    Log.d("rr", "阻塞队列");
+                    for (Process p : blockedList) {
+                        Log.d("rr", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime"+p.getRunIOtime()+":::runcputime"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+                    Log.d("rr", "原始队列");
+                    for (Process p : list) {
+                        Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
+                    }
+                    Log.d("rr", "队列----更新了addreadyblock'------------------结束--------------------------------------------------");
+
                     handler.sendEmptyMessage(time);
                     try {
                         thread.sleep(1000);
@@ -176,10 +253,12 @@ public class PriorityDispatch extends ProcessDispatch {
         int nIndex = 0;
         for (int i = 0; i < blockedList.size(); i++) {
             blockedList.get(i).setRunIOtime(blockedList.get(i).getRunIOtime() + 1);
+            blockedList.get(i).setRunTime(blockedList.get(i).getRunTime()+1);
             blockedList.get(i).setState("阻塞");
             nIndex = find2(i);
             list.get(nIndex).setRunIOtime(list.get(nIndex).getRunIOtime() + 1);
-            if (i == blockedList.size() - 1) {
+            list.get(nIndex).setRunTime(list.get(nIndex).getRunTime()+1);
+            if (i == blockedList.size() - 1) { //因为每一秒都会运行block，所以只用把新加入的对应的list的状态变为阻塞
                 nIndex = find2(i);
                 list.get(nIndex).setState("阻塞");
             }
@@ -221,7 +300,7 @@ public class PriorityDispatch extends ProcessDispatch {
             }
         }
     }
-//找到队列中最终真正的index
+//找到原始队列中最终对应的真正的index
     private int find(int mindex) {
         int mlistIndex = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -265,10 +344,6 @@ public class PriorityDispatch extends ProcessDispatch {
             processReadyList.get(mIndex).setRunCPUtime(processReadyList.get(mIndex).getRunCPUtime() + 1);
             processReadyList.get(mIndex).setRunTime(processReadyList.get(mIndex).getRunTime() + 1);
             list.get(mListIndex).setState("进行");
-            for(int i=0;i<list.size();i++){
-                Log.d("list all:name=",list.get(i).getName()+"runcputimr="+list.get(i).getRunCPUtime()+"cputtime="+list.get(i).getCPUTime()+"state="+list.get(i).getState());
-            }
-
             list.get(mListIndex).setRunCPUtime(list.get(mListIndex).getRunCPUtime() + 1);
             list.get(mListIndex).setRunTime(list.get(mListIndex).getRunTime() + 1);
         }
@@ -278,21 +353,21 @@ public class PriorityDispatch extends ProcessDispatch {
             list.get(mListIndex).setState("完成");
             list.get(mListIndex).setEndTime(time);
             processReadyList.remove(mIndex);
-            readyList.remove(mIndex);
+           // readyList.remove(mIndex);
             // 寻找下一个运行进程
             checkProcess();
 
         }
         if (type.equals("阻塞")) {
-            processReadyList.get(mIndex).setState("阻塞");
-            processReadyList.get(mIndex).setRunIOtime(processReadyList.get(mIndex).getRunIOtime() + 1);
-            processReadyList.get(mIndex).setRunTime(processReadyList.get(mIndex).getRunTime() + 1);
-            list.get(mListIndex).setState("阻塞");
-            list.get(mListIndex).setRunIOtime(list.get(mListIndex).getRunIOtime() + 1);
-            list.get(mListIndex).setRunTime(list.get(mListIndex).getRunTime() + 1);
+          //  processReadyList.get(mIndex).setState("阻塞");
+         //   processReadyList.get(mIndex).setRunIOtime(processReadyList.get(mIndex).getRunIOtime() + 1);
+           // processReadyList.get(mIndex).setRunTime(processReadyList.get(mIndex).getRunTime() + 1);
+          //  list.get(mListIndex).setState("阻塞");
+            //list.get(mListIndex).setRunIOtime(list.get(mListIndex).getRunIOtime() + 1);
+            //list.get(mListIndex).setRunTime(list.get(mListIndex).getRunTime() + 1);
             blockedList.add(processReadyList.get(mIndex));
             processReadyList.remove(mIndex);
-            readyList.remove(mIndex);
+            //readyList.remove(mIndex);
             checkProcess();
         }
 
@@ -345,16 +420,6 @@ public class PriorityDispatch extends ProcessDispatch {
        copyTmp(waitL,0);
        copyTmp(blockedL,1);
         //迭代器
-        Log.d("pp","更新前  优先级就绪————————————————————————————————————"+time);
-        for(Process p:processReadyList){
-            Log.d("wait",p.getName()+" runio="+p.getRunIOtime()+" runcput="+p.getRunCPUtime()+p.getState()+" start="+p.getStartTime());
-        }
-        Log.d("pp","更新前  优先级就绪——————————————————————————————————end——");
-        Log.d("pp","更新qian 阻塞队列————————————————————————————————————"+time);
-        for(Process p:blockedList){
-            Log.d("wait",p.getName()+" runiotime="+p.getRunIOtime()+" runcput="+p.getRunCPUtime()+p.getState()+" start="+p.getStartTime()+" iotime="+p.getIOtime());
-        }
-        Log.d("pp","更新qian  阻塞队列——————————————————————————————————end——");
         for (Process p: waitL) {
             if (p.getStartTime() <= time) {
                 p.setState("就绪");
@@ -371,18 +436,8 @@ public class PriorityDispatch extends ProcessDispatch {
                 waitList.remove(findwait(p));
             }
         }
-        Log.d("pp","更新  waitlist————————————————————————————————————"+time);
-        for(Process p:waitList){
-            Log.d("wait",p.getName()+"runio="+p.getRunIOtime()+" runcput="+p.getRunCPUtime()+p.getState()+" start="+p.getStartTime());
-        }
-        Log.d("pp","更新  等待——————————————————————————————————end——");
-        Log.d("pp","更新  processreadylist————————————————————————————————————"+time);
-        for(Process p:processReadyList){
-            Log.d("wait",p.getName()+"runio="+p.getRunIOtime()+" runcput="+p.getRunCPUtime()+p.getState()+" start="+p.getStartTime());
-        }
-        Log.d("pp","更新  优先级就绪——————————————————————————————————end——");
         for (Process p: blockedL) {
-            if (p.getIOtime() == p.getRunIOtime()) {
+            if (p.getIOtime() <= p.getRunIOtime()) {
                 p.setState("就绪");
                 readyList.add(p);
                 list.get(findp(p)).setState("就绪");
@@ -398,12 +453,6 @@ public class PriorityDispatch extends ProcessDispatch {
                 blockedList.remove(findblocked(p));
             }
         }
-        Log.d("pp","更新 阻塞队列————————————————————————————————————"+time);
-        for(Process p:blockedList){
-            Log.d("wait",p.getName()+"runio="+p.getRunIOtime()+" runcput="+p.getRunCPUtime()+p.getState()+" start="+p.getStartTime());
-        }
-        Log.d("pp","更新  阻塞队列——————————————————————————————————end——");
-
     }
 
 

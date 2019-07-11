@@ -234,11 +234,11 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
 
     // 开始时数据
     private void initData(){
-        Process p = new Process(1,"a",0,4,2,2);
+        Process p = new Process(1,"a",0,3,2,3);
         processList.add(p);
-        p = new Process(3,"b",4,7,0,0);
+        p = new Process(3,"b",4,1,0,0);
         processList.add(p);
-        p = new Process(6,"c",0,2,0,1);
+        p = new Process(6,"c",0,2,0,2);
         processList.add(p);
         p = new Process(5,"d",0,3,0,0);
         processList.add(p);

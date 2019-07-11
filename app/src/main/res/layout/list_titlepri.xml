@@ -4,44 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_name3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Name"
-        android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="7" >
 
-    <TextView
-        android:id="@+id/tv_priority3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Priority"
-        android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_name3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:gravity="center"
+                android:text="Name" />
 
-    <TextView
-        android:id="@+id/tv_starttime3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="StartTime"
-        android:layout_weight="1"/>
-    <TextView
-        android:id="@+id/tv_runtime3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="RunTime"
-        android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_priority3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Priority" />
 
-    <TextView
-        android:id="@+id/tv_state3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="state"
-        android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_starttime3"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="center"
+                android:text="StartTime" />
 
+            <TextView
+                android:id="@+id/tv_CPUtime3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="CPU" />
+
+            <TextView
+                android:id="@+id/tv_IOtime3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="IO" />
+
+            <TextView
+                android:id="@+id/tv_endtime3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="center"
+                android:text="EndTime" />
+
+            <TextView
+                android:id="@+id/tv_state3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="state" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

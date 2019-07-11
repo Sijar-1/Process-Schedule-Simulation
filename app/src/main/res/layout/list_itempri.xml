@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="7"
     >
 
     <TextView
         android:id="@+id/item_name3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.9"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/item_priority3"
@@ -26,21 +27,36 @@
         android:id="@+id/item_starttime3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        />
+        android:layout_weight="1.1"
+        android:gravity="center" />
 
     <TextView
-        android:id="@+id/item_runtime3"
+        android:id="@+id/item_CPUtime3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.5"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/item_IOtime3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.5"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/item_endtime3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"/>
-
     <TextView
         android:id="@+id/item_state3"
         android:layout_width="0dp"
