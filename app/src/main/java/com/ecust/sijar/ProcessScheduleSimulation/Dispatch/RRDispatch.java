@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.ecust.sijar.ProcessScheduleSimulation.Listener.RRListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,11 +20,10 @@ import java.util.List;
  */
 public class RRDispatch extends ProcessDispatch {
 
-    private int slotTimer;
-    private int listIndex;
-    private boolean mLock;
-
-
+    private int slotTimer;  //在一个时间片内进程运行的时间
+    private int listIndex;  // listRR（所有进程数组）的序号
+    private boolean mLock;   //判断mwaitQueue是否正在被使用
+    private RRListener rrListener;
     private List<Process> mReadyQueue; //就绪队列
     private List<Process> mBlockedQueue; //阻塞队列
     private List<Process> mWaitQueue;  //等待队列
@@ -62,11 +63,13 @@ public class RRDispatch extends ProcessDispatch {
                     pauseThread();
 
                     if (mReadyQueue.size() != 0 || mBlockedQueue.size() != 0 || mWaitQueue.size() != 0) {
+                       // logPrint();
                         block(); //时间+1
                         if (mReadyQueue.size() != 0) {
 
                             listIndex = findp(mReadyQueue.get(index)); //实际list 表格中的序号
-                            reflesh(index, listIndex, "进行");  //修改状态为进行，getRunCPUtime+1
+                             reflesh(index, listIndex, "进行");  //修改状态为进行，getRunCPUtime+1
+
                             slotTimer++;
 
                             //如果到了IO请求，阻塞
@@ -75,15 +78,18 @@ public class RRDispatch extends ProcessDispatch {
 
                                 reflesh(index, listIndex, "阻塞");  //进程加入阻塞队列，并从就绪队列中
 
+
                             } else {
                                 // 如果达到需要时间，则设置进程状态为完成
                                 if (mReadyQueue.get(index).getRunCPUtime() + mReadyQueue.get(index).getIOtime() >= mReadyQueue.get(index).getCPUTime()) {
 
                                     reflesh(index, listIndex, "完成");
+
                                 } else {
                                     // 如果到了时间片，则切换进程
                                     if (slotTimer >= slotSize) {
                                         reflesh(index, listIndex, "时间片");
+
 
                                     }
                                 }
@@ -91,10 +97,12 @@ public class RRDispatch extends ProcessDispatch {
                             }  //else
                         }
                         time++;  //已运行时间加1
+
+
                         handler.sendEmptyMessage(time); //已运行时间——+1
-                        // logPrint();
                         addReady();
                         logPrint();
+
                     } else {
                         checkProcess();  //结束
                     }
@@ -112,17 +120,28 @@ public class RRDispatch extends ProcessDispatch {
         thread.start();
     }
 
-    // 寻找进程列表中的就绪进程
+    /**
+     * 函数名： void checkProcess()
+     * 作用：1.每次切换进城后，slotTimer置0，
+     * 同时判断是否还存在进程，若不存在，time(已运行时间)置0，并使LOCK=false 退出循环
+     * 2. 若一开始进程为空，time(已运行时间)置0，slotTimer置0，并使LOCK=false 退出循环
+     * 3.进程不存在，则传递消息给rrFragment,运行结束
+     **/
     private void checkProcess() {
         slotTimer = 0;
         if (mReadyQueue.size() == 0 && mBlockedQueue.size() == 0 && mWaitQueue.size() == 0) {
             lock = false;
+
+            handler.sendEmptyMessage(1000);
         }
 
 
     }
 
-    // 检查是否在线程
+    /**
+     * 函数名：  void pauseThread()
+     * 作用：检查是否有进程挂起
+     **/
     private void pauseThread() {
         if (suspend) {
             synchronized (control) {
@@ -135,7 +154,10 @@ public class RRDispatch extends ProcessDispatch {
         }
     }
 
-
+    /**
+     * 函数名：  findp(Process p)
+     * 作用：根据进程名称找到LisRR中的该进程序号
+     **/
     private int findp(Process p) {
 
         int tmp = -1;
@@ -145,7 +167,6 @@ public class RRDispatch extends ProcessDispatch {
                 break;
             }
         }
-
         return tmp;
     }
 
@@ -174,7 +195,6 @@ public class RRDispatch extends ProcessDispatch {
         }
     }
 
-
     /**
      * void initAdd（）
      * 作用：若等待队列中已有进程开始时间==0，即立即开始，
@@ -199,7 +219,6 @@ public class RRDispatch extends ProcessDispatch {
         }
     }
 
-
     /**
      * void addReady（）
      * 作用：若等待队列中已有进程已到达进程开始时间（即开始时间==已运行时间），进程从等待队列中移除，进入就绪队列中，并将进程状态“等待”改为“就绪”
@@ -213,9 +232,7 @@ public class RRDispatch extends ProcessDispatch {
         List<Process> blockL = new ArrayList<Process>();
 
         if (mLock) {
-            Log.d("rr", "mmm");
             mLock = false;
-            //  Log.d("rr",waitL.size()+""+mWaitQueue.size());
             for (Process p : mWaitQueue) {
                 if (p.getStartTime() == time) {
                     p.setState("就绪");
@@ -255,7 +272,11 @@ public class RRDispatch extends ProcessDispatch {
     }
 
 
-    //阻塞
+    /**
+     * 函数名：void block()
+     * 作用：将阻塞队列中的进程IO运行时间+1
+     * 若有进程阻塞完好即进程运行完毕，则将进程状态改为“完成”，并从阻塞队列中删除
+     **/
 
     private void block() {
         int nIndex = 0;
@@ -273,12 +294,26 @@ public class RRDispatch extends ProcessDispatch {
 
     }
 
-    //处理
+    /**
+     * 函数名：handler
+     * 作用：异步消息处理，将time值传递到rrFragment 并更新UI
+     **/
     private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            listener.nowTime(msg.what);
+
+            switch (msg.what){
+                case 1000:
+                    rrListener.finished();
+                    break;
+                default:
+                    listener.nowTime(msg.what);
+                    break;
+
+            }
+
+
         }
     };
 
@@ -334,9 +369,8 @@ public class RRDispatch extends ProcessDispatch {
     }
 
     /**
-     * void copyList()
-     * 作用：1. 将所有进程加入到等待队列中
-     * 背景：因为list 与adapter 绑定，在运行过程中进程顺序会改变，避免listView 顺序调整，故使用浅克隆，复制队列到等待队列
+     * 函数名：void copyList()
+     * 作用：将所有进程加入到等待队列中
      **/
     private void copyList() {
         if (mLock) {
@@ -352,45 +386,31 @@ public class RRDispatch extends ProcessDispatch {
         }
     }
 
-    private void copyList(List<Process> dst, String type) {
-        if (type.equals("W")) {
-            if (mLock) {
-                mLock = false;
-                for (Process p : mWaitQueue)
-                    try {
-                        dst.add(p.clone());
-                    } catch (CloneNotSupportedException e) {
-                        e.printStackTrace();
-                    }
-                mLock = true;
-            }
-        }
-        if (type.equals("B")) {
-            for (Process p : mBlockedQueue)
-                try {
-                    dst.add(p.clone());
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-        }
-
-    }
+    /**
+     * 函数名：void update(Process p)
+     * 作用： 将新增的进程插入到等待队列中
+     **/
 
     public void update(Process p) {
         while (mLock) {
             mLock = false;
-            mWaitQueue.add(p);
-            Log.d("rr", "------" + p.getName());
+            try {
+                mWaitQueue.add(p.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
         }
         mLock = true;
     }
+
+
 
     public void logPrint() {
         /////////////////////////////////////
         Log.d("rr", "队列--------------开始" + time + "----------------------------");
         Log.d("rr", "等待队列");
         for (Process p : mWaitQueue) {
-            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime() + "::::" + p.getStartTime());
+            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime() + "::::" +p.getStartTime());
         }
 
         Log.d("rr", "就绪队列");
@@ -407,4 +427,11 @@ public class RRDispatch extends ProcessDispatch {
         //////////////////////////////////////////////////////////////
     }
 
+    public RRListener getRrListener() {
+        return rrListener;
+    }
+
+    public void setRrListener(RRListener rrListener) {
+        this.rrListener = rrListener;
+    }
 }
