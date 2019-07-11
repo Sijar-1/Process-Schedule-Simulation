@@ -1,3 +1,4 @@
+
 package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
 import android.os.Handler;
@@ -183,21 +184,21 @@ public class RRDispatch extends ProcessDispatch {
     private void initAdd() {
 
         List<Process> waitL = new ArrayList<Process>();
-        copyList(waitL, "W");
-        for (Process p : waitL) {
+        for (Process p : mWaitQueue) {
             if (p.getStartTime() == 0) {
                 p.setState("就绪");
                 mReadyQueue.add(p);
                 listRR.get(findp(p)).setState("就绪");
-                if (mLock) {
-                    mLock = false;
-                    mWaitQueue.remove(waitL.indexOf(p));
-                    mLock = true;
-                }
-
+                waitL.add(p);
+            }
+        }
+        if (waitL.size() != 0) {
+            for (Process p : waitL) {
+                mWaitQueue.remove(p);
             }
         }
     }
+
 
     /**
      * void addReady（）
@@ -212,9 +213,9 @@ public class RRDispatch extends ProcessDispatch {
         List<Process> blockL = new ArrayList<Process>();
 
         if (mLock) {
-            Log.d("rr","mmm");
+            Log.d("rr", "mmm");
             mLock = false;
-          //  Log.d("rr",waitL.size()+""+mWaitQueue.size());
+            //  Log.d("rr",waitL.size()+""+mWaitQueue.size());
             for (Process p : mWaitQueue) {
                 if (p.getStartTime() == time) {
                     p.setState("就绪");
@@ -223,7 +224,7 @@ public class RRDispatch extends ProcessDispatch {
                     waitL.add(p);
                 }
             }
-            if(waitL.size()!=0) {
+            if (waitL.size() != 0) {
                 for (Process p : waitL) {
                     mWaitQueue.remove(p);
                 }
@@ -241,13 +242,13 @@ public class RRDispatch extends ProcessDispatch {
                 } else {
                     listRR.get(findp(p)).setState("完成");
                     listRR.get(findp(p)).setEndTime(time);
-                     blockL.add(p);
+                    blockL.add(p);
                 }
             }
         }
 
-        if(blockL.size()!=0){
-            for(Process p : blockL){
+        if (blockL.size() != 0) {
+            for (Process p : blockL) {
                 mBlockedQueue.remove(p);
             }
         }
@@ -338,7 +339,7 @@ public class RRDispatch extends ProcessDispatch {
      * 背景：因为list 与adapter 绑定，在运行过程中进程顺序会改变，避免listView 顺序调整，故使用浅克隆，复制队列到等待队列
      **/
     private void copyList() {
-        if(mLock) {
+        if (mLock) {
             mLock = false;
             for (Process p : listRR) {
                 try {
@@ -389,7 +390,7 @@ public class RRDispatch extends ProcessDispatch {
         Log.d("rr", "队列--------------开始" + time + "----------------------------");
         Log.d("rr", "等待队列");
         for (Process p : mWaitQueue) {
-            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime() + "::::" +p.getStartTime());
+            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime() + "::::" + p.getStartTime());
         }
 
         Log.d("rr", "就绪队列");
