@@ -17,7 +17,7 @@ public class Process implements Cloneable{
     private int count=0;            //计数器
     private int runCPUtime=0;          //进程运行了的CPU时间    RR
     private int runIOtime=0;          //运行IO时间  RR新增
-    private String state="就绪";       //进程状态   RR
+    private String state="等待";       //进程状态   RR   sijar
     private int startTime = 0;      //进程开始时间  RR
     private int endTime = 0;         //进程结束时间  ，可以不要  RR
     private int realstartTime;        //真正开始运行时间

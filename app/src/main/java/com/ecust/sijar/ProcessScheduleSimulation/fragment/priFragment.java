@@ -56,7 +56,11 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
         processAdapter = new ProcessAdapterPri(priFragment.this.getActivity(),processList);
         lvProcess.setAdapter(processAdapter);
         lvProcess.setOnItemClickListener(this);
+        return view;
 
+    }// onCreateView-end
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         //添加进程
         btn_add_pri.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +92,12 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                                     nowTime = s;
                                     tvRuntime.setText(s+" 秒");
                                     processAdapter.notifyDataSetChanged();  //会记住划到的位置，重新加载数据时不会改变位置只改变数据
+                                    for(int i=0;i<processList.size();i++){
+                                        Log.d("prolist :name=",processList.get(i).getName()+" runcputimr="+processList.get(i).getRunCPUtime()+" cputtime="+processList.get(i).getCPUTime()+" state="+processList.get(i).getState());
+                                    }
                                 }
                             });
+
                             // 启动线程
                             dispatchMathod.startThread(processList);
                             mlock=1;
@@ -140,9 +148,10 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                 Log.d("priority", "reset.click");
             }
         });
-        return view;
+    }
 
-    }// onCreateView-end
+
+
 
 
     private void showDialog(){//添加进程弹出框
@@ -225,15 +234,17 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
 
     // 开始时数据
     private void initData(){
-        Process p = new Process(5,"a",0,3,1,1);
+        Process p = new Process(1,"a",0,4,2,2);
         processList.add(p);
         p = new Process(3,"b",4,7,0,0);
         processList.add(p);
-        p = new Process(6,"c",4,2,0,0);
+        p = new Process(6,"c",0,2,0,1);
         processList.add(p);
-        p = new Process(5,"d",5,3,0,0);
+        p = new Process(5,"d",0,3,0,0);
         processList.add(p);
         p = new Process(7,"e",7,5,0,0);
+        processList.add(p);
+        p = new Process(1,"f",7,4,0,0);
         processList.add(p);
     }
 
