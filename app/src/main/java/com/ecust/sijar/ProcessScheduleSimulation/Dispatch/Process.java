@@ -42,6 +42,7 @@ public class Process implements Cloneable{
         this.CPUTime = processTime;
         this.IOstartTime = IOstart;
         this.IOtime = IOlast;
+        this.state = "等待";
     }
 
 

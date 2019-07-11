@@ -20,7 +20,7 @@
     <string name="title_IOtime">IO时间</string>
     <string name="title_CPU">CPU</string>
     <string name="title_IO">IO</string>
-    <string name="title_total">实际运行</string>
+    <string name="title_total">结束时间</string>
     <string name="title_state">状态</string>
     <!--RR   add-->
     <string name="title_content">输入进程信息</string>
