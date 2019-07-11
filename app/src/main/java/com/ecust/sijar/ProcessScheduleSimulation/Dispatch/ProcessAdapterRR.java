@@ -68,7 +68,7 @@ public class ProcessAdapterRR extends BaseAdapter {
         tvIOtime.setText(processList.get(i).getIOstartTime()+":"+processList.get(i).getIOtime());
         tvCPU.setText(processList.get(i).getRunCPUtime()+"");
         tvIO.setText(processList.get(i).getRunIOtime()+"");
-        tvTotal.setText(processList.get(i).getRunTime()+"");
+        tvTotal.setText(processList.get(i).getEndTime()+"");
         tvState.setText(processList.get(i).getState());
 
         if(processList.get(i).getState().equals("进行")){

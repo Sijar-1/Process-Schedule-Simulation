@@ -26,8 +26,15 @@ public abstract class ProcessDispatch {
     // 抽象方法：启动线程
     public abstract void startThread(LinkedList<Process> l);
 
+
+    // 抽象方法：有优先级的启动线程
+  //  public abstract void startThread(LinkedList<Process> l, int time1);
+
     // 抽象方法：有时间片的启动线程
-    public abstract void startThread(List<Process> l, int slot);
+    public abstract void startThread(List<Process> l,int slot);
+
+
+
 
     // 注册监听器
     public void setDispatchListener(DispatchListener listener) {

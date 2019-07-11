@@ -60,7 +60,7 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rr, container, false);
-        etSlot = (EditText) view.findViewById(R.id.et_slot);
+        etSlot = (EditText) view.findViewById(R.id.et_slotrr);
         btnAdd = (Button) view.findViewById(R.id.btn_addrr);
         btnReset = (Button) view.findViewById(R.id.btn_resetrr);
         btnStart = (Button) view.findViewById(R.id.btn_startrr);
@@ -103,18 +103,24 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
 
                 if (copyListRR.size() > 0) {
                     processListRR.clear();
+
                     for (Process p : copyListRR) {
                         processListRR.add(p);
+                        Log.d("rr",p.getName());
                     }
-
-                    processAdapterRR.notifyDataSetChanged();
+                    Log.d("rr",processListRR.size()+"pro");
+                    Log.d("rr",copyListRR.size()+"cop");
+                   processAdapterRR.notifyDataSetChanged();
                     tvRuntime.setText("0 秒");
                        nowTime = 0;
-                     btnStart.setEnabled(true);
                 }
                 mlock=0; //开始
                 btnStart.setText("开始");
+                etSlot.setFocusable(true);
+                etSlot.requestFocus();
+                etSlot.setFocusableInTouchMode(true);
                 Log.d("rr", "reset.click");
+
             }
         });
 
@@ -142,11 +148,13 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
                         });
 
                         // 启动线程
-                        int slot = 3;
+                        int slot = checkSlot();
                         dispatchMathod.startThread(processListRR, slot);
                        // btnStart.setEnabled(false);
                         mlock=1;
                         btnStart.setText("暂停");
+                        etSlot.setFocusable(false);
+                        etSlot.setFocusableInTouchMode(false);
                     }
 
 
@@ -182,13 +190,13 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
         //process队列,以下为测试用
         Process p = new Process("a", 0, 10, 3, 6);
         processListRR.add(p);
-        p = new Process("b", 4, 6, 2, 2);
+        p = new Process("b", 4, 6, 2, 1);
         processListRR.add(p);
         p = new Process("c", 5, 5, 3, 2);
         processListRR.add(p);
         p = new Process("b1", 6, 7, 1, 2);
         processListRR.add(p);
-        p = new Process("b2", 7, 2, 2, 2);
+        p = new Process("b2", 7, 3, 2, 1);
         processListRR.add(p);
 
 
@@ -220,6 +228,7 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
 
 
     private void copyList() {
+        copyListRR.clear();
         for (Process p :processListRR) {
             try {
                 copyListRR.add(p.clone());
@@ -228,4 +237,18 @@ public class rrFragment extends androidx.fragment.app.Fragment implements fromMa
             }
         }
     }
+
+    // 检查时间片后，返回时间片大小
+    private int checkSlot(){
+        int slot = 0;
+        if(!etSlot.getText().toString().equals("")){
+            slot = Integer.valueOf(etSlot.getText().toString());
+
+        }else{
+            // 若不输入时间片大小，时间片调度算法时间片默认大小为2
+            slot = 2;
+        }
+        return slot;
+    }
+
 }
