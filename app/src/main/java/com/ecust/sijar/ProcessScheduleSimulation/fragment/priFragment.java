@@ -142,7 +142,6 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                 }
                 mlock=0;   //开始
                 button_start_timer.setText("开始");
-                Log.d("priority", "reset.click");
             }
         });
     }
@@ -199,13 +198,13 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
 
                 Process process = new Process(priority,name,starttime,CPUruntime,IOstarttime,IOtime);
                 processList.add(process);
-                Log.d("pri","插入新进程");
+                processAdapter.notifyDataSetChanged();
+                // 调整优先级列表
+             //   dispatchMathod.InsertProcess(process,processList);
+                Log.d("pri","插入新进程根据优先级_______________________________------------------------------___________------------___--------_________----------__________");
                 for(int i=0;i<processList.size();i++){
                     Log.d("prolist：",processList.get(i).getName()+" runcputimr="+processList.get(i).getRunCPUtime()+" cputtime="+processList.get(i).getCPUTime()+" state="+processList.get(i).getState());
                 }
-                processAdapter.notifyDataSetChanged();
-                // 调整优先级列表
-                dispatchMathod.InsertProcess(process,processList);
                 dialog.dismiss();
                 // 若已备份初始进程信息，插入新来的进程
                 if(copyList.size()>0){

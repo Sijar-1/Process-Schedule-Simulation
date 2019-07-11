@@ -441,41 +441,22 @@ public class PriorityDispatch extends ProcessDispatch {
                 p.setState("就绪");
                 readyList.add(p);
                 list.get(findp(p)).setState("就绪");
-                if (p.getPriority() < processReadyList.get(0).getPriority()&&processReadyList.get(0).getState()=="就绪") {
-                    processReadyList.add(0, p);
+                if(processReadyList.get(0).getState()=="进行"&&p.getPriority() < processReadyList.get(0).getPriority()){
+                    processReadyList.add(1, p);
                 }else{
-                    for (int j = processReadyList.size() - 1; j >=0; j--) {
+                    for (int j = processReadyList.size() - 1; j >= 0; j--) {
                         if (p.getPriority() < processReadyList.get(0).getPriority()) {
-                            processReadyList.add(1, p);break;
+                            processReadyList.add(0, p);break;
                         }
                         if (p.getPriority() >= processReadyList.get(j).getPriority()) {
-                            processReadyList.add(j + 1, p);
+                            processReadyList.add(j + 1, p);break;
                         }
                     }
                 }
-
                 waitList.remove(findwait(p));
             }
-        }
-        for (Process p: blockedL) {
-            if (p.getIOtime() < p.getRunIOtime()) {
-                p.setState("就绪");
-                readyList.add(p);
-                list.get(findp(p)).setState("就绪");
-                //加入优先级排序的就绪队列
-                if (p.getPriority() < processReadyList.get(0).getPriority()&&processReadyList.get(0).getState()=="就绪") {
-                    processReadyList.add(0, p);
-                }else{
-                    for (int j = processReadyList.size() - 1; j >=0; j--) {
-                        if (p.getPriority() < processReadyList.get(0).getPriority()) {
-                            processReadyList.add(1, p);break;
-                        }
-                        if (p.getPriority() >= processReadyList.get(j).getPriority()) {
-                            processReadyList.add(j + 1, p);
-                        }
-                    }
-                }
-              /*  for (int j = processReadyList.size() - 1; j >= 0; j--) {
+
+               /* for (int j = processReadyList.size() - 1; j >= 0; j--) {
                     if (p.getPriority() < processReadyList.get(0).getPriority()) {
                         processReadyList.add(0, p);
                     }
@@ -483,9 +464,30 @@ public class PriorityDispatch extends ProcessDispatch {
                         processReadyList.add(j + 1, p);
                     }
                 }*/
-                blockedList.remove(findblocked(p));
+
+        }
+        for (Process p: blockedL) {
+            if (p.getIOtime() < p.getRunIOtime()) {
+                p.setState("就绪");
+                readyList.add(p);
+                list.get(findp(p)).setState("就绪");
+                //加入优先级排序的就绪队列
+                if(processReadyList.get(0).getState()=="进行"&&p.getPriority() < processReadyList.get(0).getPriority()){
+                    processReadyList.add(1, p);
+                }else{
+                    for (int j = processReadyList.size() - 1; j >= 0; j--) {
+                        if (p.getPriority() < processReadyList.get(0).getPriority()) {
+                            processReadyList.add(0, p);break;
+                        }
+                        if (p.getPriority() >= processReadyList.get(j).getPriority()) {
+                            processReadyList.add(j + 1, p);break;
+                        }
+                    }
+                }
+            blockedList.remove(findblocked(p));
             }
         }
+
     }
 
 
