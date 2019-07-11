@@ -67,7 +67,7 @@ public class PriorityDispatch extends ProcessDispatch {
                 isRunning = true;
                 while (lock) {//循环，改变优先级顺序的就绪队列第一个进程的状态
                     pauseThread();// 检查是否阻塞（点击暂停按钮suspend改变此函数被阻塞）
-                    block();    //把阻塞队列里的进程的状态设置为阻塞
+                    block();    //把阻塞队列里的进程的状态设置为阻塞,IOruntime+1
                     Log.d("rr", "block之后队列--------------开始"+time+"-----------");
                     Log.d("pri", "等待队列");
                     for (Process p : waitList) {
@@ -88,6 +88,7 @@ public class PriorityDispatch extends ProcessDispatch {
                         Log.d("pri", p.getName()+" start"+p.getStartTime()+" iotime="+p.getIOtime()+" runtime="+p.getRunTime()+":::runiotime="+p.getRunIOtime()+":::runcputime:"+p.getRunCPUtime()+" state="+p.getState());
                     }
                     Log.d("rr", "block之后队列---------------------结束---------");
+
                     if(processReadyList.size()!=0){
                         listIndex=find(index);//listIndex为对应的原始list里的index,index=0
                            changeState(index,listIndex,"进行");
@@ -115,7 +116,7 @@ public class PriorityDispatch extends ProcessDispatch {
                         if (processReadyList.get(index).getIOstartTime() == processReadyList.get(index).getRunCPUtime()&&processReadyList.get(index).getIOtime()!=0) {
                             changeState(index, listIndex, "阻塞");
                         } else
-                            if (processReadyList.get(index).getRunCPUtime()>= processReadyList.get(index).getCPUTime()) {
+                            if (processReadyList.get(index).getRunCPUtime()== processReadyList.get(index).getCPUTime()) {
                                 changeState(index, listIndex, "完成");
                             }
 
@@ -326,12 +327,8 @@ public class PriorityDispatch extends ProcessDispatch {
         if (type.equals("进行")) {
             if(list.get(mListIndex).getProcessrunning()==0){
                //初次变进行便是真正开始运行时间
-                Log.d(" d","realstart time     __________start");
-                Log.d("d",processReadyList.get(mIndex).getName()+"  realstart"+processReadyList.get(mIndex).getRealStartTime());
                 processReadyList.get(mIndex).setRealStartTime(time);
-                list.get(mIndex).setRealStartTime((time));
-                Log.d(" d","realstart time     __________start    _______2");
-                Log.d("d",processReadyList.get(mIndex).getName()+"  realstart"+processReadyList.get(mIndex).getRealStartTime());
+                list.get(mListIndex).setRealStartTime((time));
                 processReadyList.get(mIndex).setProcessrunning(1);
                 list.get(mListIndex).setProcessrunning(1);
             }
@@ -345,9 +342,9 @@ public class PriorityDispatch extends ProcessDispatch {
         }
         if (type.equals("完成")) {
             processReadyList.get(mIndex).setState("完成");
-            processReadyList.get(mIndex).setEndTime(time);
+            processReadyList.get(mIndex).setEndTime(time+1);
             list.get(mListIndex).setState("完成");
-            list.get(mListIndex).setEndTime(time);
+            list.get(mListIndex).setEndTime(time+1);
             readyList.remove(findready(list.get(mListIndex)));
             processReadyList.remove(mIndex);
             // 判断是否存在进程
@@ -461,7 +458,7 @@ public class PriorityDispatch extends ProcessDispatch {
             }
         }
         for (Process p: blockedL) {
-            if (p.getIOtime() == p.getRunIOtime()) {
+            if (p.getIOtime() < p.getRunIOtime()) {
                 p.setState("就绪");
                 readyList.add(p);
                 list.get(findp(p)).setState("就绪");

@@ -197,7 +197,7 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                     return ;
                 }
 
-         Process process = new Process(priority,name,starttime,CPUruntime,IOstarttime,IOtime);
+                Process process = new Process(priority,name,starttime,CPUruntime,IOstarttime,IOtime);
                 processList.add(process);
                 Log.d("pri","插入新进程");
                 for(int i=0;i<processList.size();i++){
@@ -227,11 +227,11 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
 
     // 开始时数据
     private void initData(){
-        Process p = new Process(1,"a",0,3,2,3);
+        Process p = new Process(1,"a",0,3,1,2);
         processList.add(p);
         p = new Process(3,"b",4,1,0,0);
         processList.add(p);
-        p = new Process(6,"c",0,2,0,2);
+        p = new Process(6,"c",0,2,1,2);
         processList.add(p);
         p = new Process(5,"d",0,3,0,0);
         processList.add(p);
