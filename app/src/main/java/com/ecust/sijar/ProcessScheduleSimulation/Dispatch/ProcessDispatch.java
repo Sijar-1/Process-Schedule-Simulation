@@ -77,4 +77,7 @@ public abstract class ProcessDispatch {
     public void InsertProcess(Process p) {
         return;
     }
+    public void InsertProcess(Process p,LinkedList<Process> plist) {
+        return;
+    }
 }

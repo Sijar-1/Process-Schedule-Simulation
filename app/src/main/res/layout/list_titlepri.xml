@@ -37,7 +37,13 @@
                 android:layout_weight="1.1"
                 android:gravity="center"
                 android:text="StartTime" />
-
+            <TextView
+                android:id="@+id/tv_realstart3"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="center"
+                android:text="RealStart" />
             <TextView
                 android:id="@+id/tv_CPUtime3"
                 android:layout_width="0dp"
@@ -66,7 +72,7 @@
                 android:id="@+id/tv_state3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:gravity="center"
                 android:text="state" />
         </LinearLayout>

@@ -92,9 +92,6 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                                     nowTime = s;
                                     tvRuntime.setText(s+" 秒");
                                     processAdapter.notifyDataSetChanged();  //会记住划到的位置，重新加载数据时不会改变位置只改变数据
-                                    for(int i=0;i<processList.size();i++){
-                                        Log.d("prolist :name=",processList.get(i).getName()+" runcputimr="+processList.get(i).getRunCPUtime()+" cputtime="+processList.get(i).getCPUTime()+" state="+processList.get(i).getState());
-                                    }
                                 }
                             });
 
@@ -149,11 +146,6 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
             }
         });
     }
-
-
-
-
-
     private void showDialog(){//添加进程弹出框
         View root = LayoutInflater.from(this.getActivity()).inflate(R.layout.dialog_addpri,null);
         final EditText etDialogName = (EditText) root.findViewById(R.id.et_dialog_namepri);
@@ -206,11 +198,15 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                 }
 
          Process process = new Process(priority,name,starttime,CPUruntime,IOstarttime,IOtime);
-             //   process.setStartTime(nowTime);
                 processList.add(process);
+                Log.d("pri","插入新进程");
+                for(int i=0;i<processList.size();i++){
+                    Log.d("prolist：",processList.get(i).getName()+" runcputimr="+processList.get(i).getRunCPUtime()+" cputtime="+processList.get(i).getCPUTime()+" state="+processList.get(i).getState());
+                }
                 processAdapter.notifyDataSetChanged();
+                // 调整优先级列表
+                dispatchMathod.InsertProcess(process,processList);
                 dialog.dismiss();
-
                 // 若已备份初始进程信息，插入新来的进程
                 if(copyList.size()>0){
                     try {
@@ -219,9 +215,6 @@ public class priFragment extends Fragment implements AdapterView.OnItemClickList
                         e.printStackTrace();
                     }
                 }
-
-                // 优先级调度，需调整优先级列表
-                    dispatchMathod.InsertProcess(process);
 
                 // 如果线程还存在，则唤醒线程
                 if(dispatchMathod.isRunning()){
