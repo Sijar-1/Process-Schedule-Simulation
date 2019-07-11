@@ -56,6 +56,7 @@ public class ProcessAdapterPri extends BaseAdapter{
         TextView tvEndTime=(TextView) root.findViewById(R.id.item_endtime3) ;
         TextView tvState = (TextView) root.findViewById(R.id.item_state3);
         TextView tvStartTime = (TextView) root.findViewById(R.id.item_starttime3);
+        TextView tvRealStartTime = (TextView) root.findViewById(R.id.item_realstart3);
 
         tvName.setText(processList.get(i).getName());
         tvPriority.setText(processList.get(i).getPriority()+"");
@@ -64,6 +65,7 @@ public class ProcessAdapterPri extends BaseAdapter{
         tvEndTime.setText(processList.get(i).getEndTime()+"");
         tvState.setText(processList.get(i).getState());
         tvStartTime.setText(processList.get(i).getStartTime()+"");
+        tvRealStartTime.setText(processList.get(i).getRealStartTime()+"");
         if(processList.get(i).getState().equals("进行")){
             root.setBackgroundColor(Color.parseColor("#D1EEEE"));
         }

@@ -18,9 +18,11 @@ public class Process implements Cloneable{
     private int runCPUtime=0;          //进程运行了的CPU时间    RR
     private int runIOtime=0;          //运行IO时间  RR新增
     private String state="等待";       //进程状态   RR   sijar
+    private int realStartTime;   //进程真正开始运行的时间
     private int startTime = 0;      //进程开始时间  RR
     private int endTime;         //进程结束时间  ，可以不要  RR
     private int realstartTime;        //真正开始运行时间
+    private int processrunning=0;        //用来判断什么时候设置真实开始时间的
 
 /**
  *
@@ -51,6 +53,7 @@ public class Process implements Cloneable{
         this.name = name;
         this.priority = priority;
         this.startTime=startTime;
+        this.realstartTime=startTime;
         this.CPUTime = CPUTime;
         this.IOstartTime=IOstartTime;
         this.IOtime=IOtime;
@@ -140,12 +143,20 @@ public class Process implements Cloneable{
         this.startTime = startTime;
     }
 
-    public int getRealstartTime() {
-        return realstartTime;
+    public int getRealStartTime() {
+        return realStartTime;
     }
 
-    public void setRealstartTime(int realstartTime) {
-        this.realstartTime = realstartTime;
+    public void setRealStartTime(int realStartTime) {
+        this.realStartTime = realStartTime;
+    }
+
+    public int getProcessrunning() {
+        return processrunning;
+    }
+
+    public void setProcessrunning(int processrunning) {
+        this.processrunning = processrunning;
     }
 
     @Override
