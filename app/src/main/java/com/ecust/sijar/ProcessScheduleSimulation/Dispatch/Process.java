@@ -1,30 +1,38 @@
 package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
-import java.util.List;
+import java.util.LinkedList;
 /**
  * Created by Sijar on 2019/7/3.
  * PCB信息对象类
  */
 public class Process implements Cloneable{
 
-    private String name="未命名";    //进程标识符
+    private String name="未命名";    //进程标识符  RR
     private int priority=10;          //进程优先数
     private int round=1;             //进程轮转时间片
-    private int runTime=0;           //进程运行时间（动态的）
-    private int CPUTime=1;           //进程占用CPU时间（不变的）
-    private int IOstartTime=0;         //I/O相对CPU开始时间
-    private int IOtime=0;            //I/O持续时间
+    private int runTime=0;           //进程运行时间（动态的）  RR
+    private int CPUTime=1;           //进程占用CPU时间（不变的） RR
+    private int IOstartTime=0;         //I/O相对CPU开始时间   RR
+    private int IOtime=0;            //I/O持续时间  RR
     private int count=0;            //计数器
-    private int runCPUtime=0;          //进程运行了的CPU时间
-    private String state="就绪";       //进程状态
-    private int startTime = 0;      //进程开始时间
-    private int endTime = 0;         //进程结束时间  ，可以不要
-    private List<Process> next;    //链指针
+    private int runCPUtime=0;          //进程运行了的CPU时间    RR
+    private int runIOtime=0;          //运行IO时间  RR新增
+    private String state="等待";       //进程状态   RR   sijar
+    private int realStartTime;   //进程真正开始运行的时间
+    private int startTime = 0;      //进程开始时间  RR
+    private int endTime;         //进程结束时间  ，可以不要  RR
+    private int processrunning=0;        //用来判断什么时候设置真实开始时间的
 
-    public Process(String name,int startTime,int runTime){
+/**
+ *
+ *
+    //先来先服务算法创建进程
+    public Process(String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
         this.name = name;
         this.startTime=startTime;
-        this.runTime = runTime;
+        this.CPUTime = CPUTime;
+        this.IOstartTime=IOstartTime;
+        this.IOtime=IOtime;
     }
     public Process(String name,int startTime,int CPUTime,int runTime){
         this.name = name;
@@ -33,17 +41,27 @@ public class Process implements Cloneable{
         this.runTime = runTime;
     }
 
-    public Process(int round,String name,int startTime,int runTime){
+ **/
+    //时间片轮转算法-----重载
+    public Process(String name,int startTime, int processTime,int IOstart,int IOlast){
         this.name = name;
-        this.round = round;
-        this.startTime=startTime;
-        this.runTime = runTime;
+        this.startTime = startTime;
+        this.CPUTime = processTime;
+        this.IOstartTime = IOstart;
+        this.IOtime = IOlast;
+        this.state = "等待";
     }
-    public Process(String name,int priority,int x,int startTime,int runTime){
+
+
+    //优先级算法创建进程
+    public Process(int priority,String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
         this.name = name;
         this.priority = priority;
         this.startTime=startTime;
-        this.runTime = runTime;
+        this.realStartTime=startTime;
+        this.CPUTime = CPUTime;
+        this.IOstartTime=IOstartTime;
+        this.IOtime=IOtime;
     }
     public String getName() {
         return name;
@@ -137,29 +155,38 @@ public class Process implements Cloneable{
         this.startTime = startTime;
     }
 
-    public List<Process> getNext() { return next; }
-    public void setNext(List<Process> next) { this.next = next; }
+    public int getRealStartTime() {
+        return realStartTime;
+    }
+
+    public void setRealStartTime(int realStartTime) {
+        this.realStartTime = realStartTime;
+    }
+
+    public int getProcessrunning() {
+        return processrunning;
+    }
+
+    public void setProcessrunning(int processrunning) {
+        this.processrunning = processrunning;
+    }
+
     @Override
     public Process clone() throws CloneNotSupportedException {
         try {
             Process p = (Process) super.clone();
-            p.name = this.name;
-            p.priority = this.priority;
-            p.round=this.round;
-            p.runTime = this.runTime;
-            p.CPUTime=this.CPUTime;
-            p.IOstartTime=this.IOstartTime;
-            p.IOtime=this.IOtime;
-            p.count=this.count;
-            p.runCPUtime = this.runCPUtime;
-            p.state = this.state;
-            p.startTime = this.startTime;
-            p.endTime = this.endTime;
-            p.next=this.next;
             return p;
         }catch (Exception e){
 
         }
         return null;
+    }
+
+    public int getRunIOtime() {
+        return runIOtime;
+    }
+
+    public void setRunIOtime(int runIOtime) {
+        this.runIOtime = runIOtime;
     }
 }

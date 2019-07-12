@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/create_user_dialog_view"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="输入进程信息"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_namepri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进  程  名:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_namepri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_prioritypri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_dialog_namepri"
+            android:text="优  先  级:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_prioritypri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(范围:1-10)"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_starttimepri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="开始时间:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_starttimepri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(单位:秒)"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_CPUruntimepri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="CPU运行时间:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_CPUruntimepri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(单位:秒)"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_IOstarttimepri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="I/O相对于CPU开始时的开始时间:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_IOstarttimepri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(单位:秒)"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_dialog_IOtimepri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I/O持续时间:"/>
+
+        <EditText
+            android:id="@+id/et_dialog_IOtimepri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(单位:秒)"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_dialog_surepri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_dialog_CPUruntimepri"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_login_selector"
+        android:text="添加"
+        android:textSize="16sp"
+        android:textColor="#ffffff"/>
+
+</LinearLayout>

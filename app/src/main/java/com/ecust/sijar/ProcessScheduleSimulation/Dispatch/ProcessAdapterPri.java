@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.ecust.sijar.ProcessScheduleSimulation.R;
 
-import java.util.List;
+import java.util.LinkedList;
+
 
 /**
  * Created by Sijar on 2019/7/3.
@@ -19,47 +20,52 @@ import java.util.List;
 public class ProcessAdapterPri extends BaseAdapter{
 
     private Context context;
-    private List<Process> processList;
+    private LinkedList<Process> processList;
 
-    public ProcessAdapterPri(Context context, List<Process> list){
+    public ProcessAdapterPri(Context context, LinkedList<Process> list){
         this.context = context;
         processList = list;
     }
     @Override
+    //ListView需要显示的数据数量
     public int getCount() {
         return processList.size();
-    }   //好像可以去掉，可以设置在PCB类里的成员变量
+    }
 
     @Override
+    //指定的索引对应的数据项
     public Object getItem(int i) {
         return processList.get(i);
     }
 
     @Override
+    //指定的索引对应的数据项ID
     public long getItemId(int i) {
         return i;
     }
 
     @Override
+    //返回每一项的显示内容
     public View getView(int i, View view, ViewGroup viewGroup) {
+        //将布局文件转化为View对象
         View root = LayoutInflater.from(context).inflate(R.layout.list_itempri,null);
         TextView tvName = (TextView) root.findViewById(R.id.item_name3);
         TextView tvPriority = (TextView) root.findViewById(R.id.item_priority3);
-      //  TextView tvRound=(TextView)root.findViewById(R.id.item_round);
-        TextView tvRuntime = (TextView) root.findViewById(R.id.item_runtime3);
-    //    TextView tvCount = (TextView) root.findViewById(R.id.item_count);
-     //   TextView tvNeedTime = (TextView) root.findViewById(R.id.item_need_time);
+        TextView tvCPUtime = (TextView) root.findViewById(R.id.item_CPUtime3);  //cpu时间
+        TextView tvIOtime = (TextView) root.findViewById(R.id.item_IOtime3);  //IO时间
+        TextView tvEndTime=(TextView) root.findViewById(R.id.item_endtime3) ;
         TextView tvState = (TextView) root.findViewById(R.id.item_state3);
         TextView tvStartTime = (TextView) root.findViewById(R.id.item_starttime3);
-      //  TextView tvEndTime = (TextView) root.findViewById(R.id.item_endtime);
+        TextView tvRealStartTime = (TextView) root.findViewById(R.id.item_realstart3);
 
         tvName.setText(processList.get(i).getName());
         tvPriority.setText(processList.get(i).getPriority()+"");
-     //   tvRound.setText(processList.get(i).getRound()+"s");
-        tvRuntime.setText(processList.get(i).getRunTime()+"s");
-     //   tvCount.setText(processList.get(i).getCount());
-     //   tvNeedTime.setText(processList.get(i).getNeedTime()+"s");
+        tvCPUtime.setText(processList.get(i).getCPUTime()+"");
+        tvIOtime.setText(processList.get(i).getIOtime()+"");
+        tvEndTime.setText(processList.get(i).getEndTime()+"");
         tvState.setText(processList.get(i).getState());
+        tvStartTime.setText(processList.get(i).getStartTime()+"");
+        tvRealStartTime.setText(processList.get(i).getRealStartTime()+"");
         if(processList.get(i).getState().equals("进行")){
             root.setBackgroundColor(Color.parseColor("#D1EEEE"));
         }
@@ -67,8 +73,9 @@ public class ProcessAdapterPri extends BaseAdapter{
                 ||processList.get(i).getState().equals("完成")){
             root.setBackgroundColor(Color.WHITE);
         }
-        tvStartTime.setText(processList.get(i).getStartTime());
-     //   tvEndTime.setText(processList.get(i).getEndTime());
+        if(processList.get(i).getState().equals("阻塞")){
+            root.setBackgroundColor(Color.parseColor("#FFC0CB"));
+        }
         return root;
     }
 }

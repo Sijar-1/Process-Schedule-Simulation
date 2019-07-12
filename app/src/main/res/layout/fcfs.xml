@@ -8,7 +8,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/lable1"
+            android:id="@+id/lable1pri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -16,31 +16,31 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tv_dispatch"
+            android:id="@+id/tv_dispatchpri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_toRightOf="@id/lable1"
+            android:layout_toRightOf="@id/lable1pri"
             android:text="先来先服务调度"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/label2"
+            android:id="@+id/label2pri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/lable1"
+            android:layout_below="@id/lable1pri"
             android:layout_centerVertical="true"
             android:text="已运行:"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tv_allruntime"
+            android:id="@+id/tv_allruntimepri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/label2"
-            android:layout_alignBottom="@id/label2"
+            android:layout_toRightOf="@id/label2pri"
+            android:layout_alignBottom="@id/label2pri"
             android:textSize="18sp"
             android:text="0 秒"/>
 
@@ -49,7 +49,7 @@
             android:id="@+id/layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label2"
+            android:layout_below="@id/label2pri"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical">
 
@@ -97,7 +97,11 @@
         android:layout_height="wrap_content"/>
 
     <ListView
+<<<<<<< HEAD
         android:id="@+id/lv_processfcfs"
+=======
+        android:id="@+id/lv_processpri"
+>>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

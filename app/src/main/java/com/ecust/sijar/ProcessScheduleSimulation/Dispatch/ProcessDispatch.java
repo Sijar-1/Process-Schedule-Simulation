@@ -1,7 +1,9 @@
 package com.ecust.sijar.ProcessScheduleSimulation.Dispatch;
 
 
+import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * Created by Sijar on 2019/7/3.
@@ -18,13 +20,16 @@ public abstract class ProcessDispatch {
     protected int index;
     protected int length;
     protected int time;
-    protected List<Process> list;
+    protected LinkedList<Process> list;   //所有进程的队列
+    protected List<Process> listRR;   // 时间片轮转算法 所有进程的数组
 
     // 抽象方法：启动线程
-    public abstract void startThread(List<Process> l);
+    public abstract void startThread(LinkedList<Process> l);
+
 
     // 抽象方法：有时间片的启动线程
-    public abstract void startThread(List<Process> l, int slot);
+    public abstract void startThread(List<Process> l,int slot);
+
 
     // 注册监听器
     public void setDispatchListener(DispatchListener listener) {
@@ -60,11 +65,16 @@ public abstract class ProcessDispatch {
     public void stop() {
         if (isRunning()) {
             lock = false;
+            isRunning = false;
+            suspend = false;
         }
     }
 
     // 被优先级调度算法覆盖的动态插入进程算法
     public void InsertProcess(Process p) {
+        return;
+    }
+    public void InsertProcess(Process p,LinkedList<Process> plist) {
         return;
     }
 }

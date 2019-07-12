@@ -6,16 +6,7 @@
     >
 
     <TextView
-        android:id="@+id/item_name3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="0.9"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/item_priority3"
+        android:id="@+id/item_namerr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -24,51 +15,58 @@
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/item_starttime3"
+        android:id="@+id/item_process_timerr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1.1"
-        android:gravity="center" />
-    <TextView
-        android:id="@+id/item_realstart3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1.1"
-        android:gravity="center" />
-    <TextView
-        android:id="@+id/item_CPUtime3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="0.5"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/item_IOtime3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="0.5"
-        android:gravity="center" />
-    <TextView
-        android:id="@+id/item_endtime3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"/>
+
     <TextView
-        android:id="@+id/item_state3"
+        android:id="@+id/item_IOtimerr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:id="@+id/item_CPUrr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:id="@+id/item_IOrr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/item_totalrr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.4"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:id="@+id/item_staterr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
