@@ -65,6 +65,8 @@ public abstract class ProcessDispatch {
     public void stop() {
         if (isRunning()) {
             lock = false;
+            isRunning = false;
+            suspend = false;
         }
     }
 
