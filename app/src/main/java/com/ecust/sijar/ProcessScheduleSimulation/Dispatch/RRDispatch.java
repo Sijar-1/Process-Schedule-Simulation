@@ -97,9 +97,8 @@ public class RRDispatch extends ProcessDispatch {
                             }  //else
                         }
                         time++;  //已运行时间加1
-
-
                         handler.sendEmptyMessage(time); //已运行时间——+1
+                        logPrint();
                         addReady();
                         logPrint();
 
@@ -283,6 +282,7 @@ public class RRDispatch extends ProcessDispatch {
             mBlockedQueue.get(i).setState("阻塞");
             nIndex = findp(mBlockedQueue.get(i));
             listRR.get(nIndex).setRunIOtime(listRR.get(nIndex).getRunIOtime() + 1);
+            Log.d("rr",listRR.get(nIndex).getName()+listRR.get(nIndex).getRunIOtime());
             if (i == mBlockedQueue.size() - 1) {
                 nIndex = findp(mBlockedQueue.get(i));
                 listRR.get(nIndex).setState("阻塞");
@@ -390,15 +390,14 @@ public class RRDispatch extends ProcessDispatch {
      **/
 
     public void update(Process p) {
-        while (mLock) {
-            mLock = false;
+
             try {
                 mWaitQueue.add(p.clone());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
-        }
-        mLock = true;
+
+
     }
 
 
@@ -408,17 +407,17 @@ public class RRDispatch extends ProcessDispatch {
         Log.d("rr", "队列--------------开始" + time + "----------------------------");
         Log.d("rr", "等待队列");
         for (Process p : mWaitQueue) {
-            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime() + "::::" +p.getStartTime());
+            Log.d("rr", p.getName() + ":::"+ p.getStartTime()+";"+p.getCPUTime()  + ":::"+ p.getIOstartTime()+";"+p.getIOtime()  + "::::" + p.getRunCPUtime() + "::::" + p.getRunIOtime() + p.getState());
         }
 
         Log.d("rr", "就绪队列");
         for (Process p : mReadyQueue) {
-            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime());
+            Log.d("rr", p.getName() + ":::"+ p.getStartTime()+";"+p.getCPUTime()  + ":::"+ p.getIOstartTime()+";"+p.getIOtime() + "::::" + p.getRunCPUtime() + "::::" + p.getRunIOtime() + p.getState());
         }
 
         Log.d("rr", "阻塞队列");
         for (Process p : mBlockedQueue) {
-            Log.d("rr", p.getName() + ":::" + p.getRunIOtime() + "::::" + p.getRunCPUtime());
+            Log.d("rr", p.getName() + ":::"+ p.getStartTime()+";"+p.getCPUTime()  + ":::"+ p.getIOstartTime()+";"+p.getIOtime()+ "::::" + p.getRunCPUtime() + "::::" + p.getRunIOtime() + p.getState());
         }
 
         Log.d("rr", "队列------------------------------------------");
