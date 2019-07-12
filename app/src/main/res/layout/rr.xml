@@ -8,11 +8,11 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/lable1"
+            android:id="@+id/lable1rr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="算    法:"
+            android:text="@string/lable_algorithm"
             android:textSize="18sp"/>
 
         <TextView
@@ -20,91 +20,91 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_toRightOf="@id/lable1"
-            android:text="时间片轮转算法"
+            android:layout_toRightOf="@id/lable1rr"
+            android:text="@string/rr_algorithm"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/label2"
+            android:id="@+id/label2rr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/lable1"
+            android:layout_below="@id/lable1rr"
             android:layout_centerVertical="true"
-            android:text="已运行:"
+            android:text="@string/lable_runtimeAll"
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tv_allruntime"
+            android:id="@+id/tv_runtimerr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/label2"
-            android:layout_alignBottom="@id/label2"
+            android:layout_toRightOf="@id/label2rr"
+            android:layout_alignBottom="@id/label2rr"
             android:textSize="18sp"
-            android:text="0 秒"/>
+            android:text="@string/runtimeAll"/>
 
 
         <LinearLayout
-            android:id="@+id/layout"
+            android:id="@+id/layoutrr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label2"
+            android:layout_below="@id/label2rr"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="时间片:"
+                android:text="@string/lable_slot"
                 android:textSize="18sp"/>
 
             <EditText
-                android:id="@+id/et_slot"
+                android:id="@+id/et_slotrr"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textSize="18sp"
-                android:enabled="false"
+                android:enabled="true"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(单位:秒)"/>
+                android:text="@string/unit"/>
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_chartpri"
+            android:id="@+id/btn_chartrr"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/btn_login_selector"
-            android:text="更改"
+            android:text="@string/chart"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
 
         <Button
-            android:id="@+id/btn_resetpri"
+            android:id="@+id/btn_resetrr"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/btn_chartpri"
+            android:layout_below="@id/btn_chartrr"
             android:background="@drawable/btn_login_selector"
-            android:text="重置"
+            android:text="@string/reset"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
 
     </RelativeLayout>
 
     <include
-        layout="@layout/list_titlepri"
+        layout="@layout/list_title_rr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <ListView
-        android:id="@+id/lv_process"
+        android:id="@+id/lv_process_rr"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -117,24 +117,24 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/btn_addpri"
+            android:id="@+id/btn_addrr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/btn_login_selector"
-            android:text="添加进程"
+            android:text="@string/add"
             android:textColor="#ffffff"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btn_startpri"
+            android:id="@+id/btn_startrr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:background="@drawable/btn_login_selector"
-            android:text="开始"
+            android:text="@string/start"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
 
