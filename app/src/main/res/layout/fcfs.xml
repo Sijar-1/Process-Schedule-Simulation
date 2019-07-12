@@ -36,7 +36,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tv_allruntimepri"
+            android:id="@+id/tv_allruntime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/label2pri"
@@ -97,11 +97,8 @@
         android:layout_height="wrap_content"/>
 
     <ListView
-<<<<<<< HEAD
+
         android:id="@+id/lv_processfcfs"
-=======
-        android:id="@+id/lv_processpri"
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

@@ -1,7 +1,6 @@
 package com.ecust.sijar.ProcessScheduleSimulation.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.Process;
-import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.fcfs;
+import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.fcfsDispatch;
 import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.*;
-import com.ecust.sijar.ProcessScheduleSimulation.MainActivity;
 import com.ecust.sijar.ProcessScheduleSimulation.R;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-
-
-
 
 
 public class fcfsFragment extends Fragment implements AdapterView.OnItemClickListener{
@@ -40,9 +34,9 @@ public class fcfsFragment extends Fragment implements AdapterView.OnItemClickLis
     private Button btnStop;
     private int nowTime = 0;
     private ProcessAdapter processAdapter = null;
-    private LinkedList<Process> processList = new LinkedList<Process>();
-    private LinkedList<Process> copyList = new LinkedList<Process>();
-    private ProcessDispatch dispatchMathod = new fcfs();
+    private List<Process> processList = new ArrayList<Process>();
+    private List<Process> copyList = new ArrayList<Process>();
+    private ProcessDispatch dispatchMathod = new fcfsDispatch();
     private    int flag=0;
 
     @Nullable
@@ -143,8 +137,9 @@ public class fcfsFragment extends Fragment implements AdapterView.OnItemClickLis
                     });
 
                     // 启动线程
-                    int slot = 3;
-                    dispatchMathod.startThread(processList,slot);
+                //    int slot = 3;
+       //             dispatchMathod.startThread(processList,slot);
+                    dispatchMathod.startThread(processList);
                     btnStart.setEnabled(false);
                 }
             }
@@ -185,7 +180,7 @@ public class fcfsFragment extends Fragment implements AdapterView.OnItemClickLis
                     if(flag==1){
                         flag=2;
                         dispatchMathod.pause();
-                        btnStop.setText(int flag);
+                        btnStop.setText(flag);
                     }
                     else {
                         flag=1;

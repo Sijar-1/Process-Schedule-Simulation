@@ -33,7 +33,8 @@ public class RRDispatch extends ProcessDispatch {
     public void startThread(LinkedList<Process> l) {
         startThread(l, 1);
     }
-
+    @Override
+    public void startThread(List<Process> l){return;}
 
     // 抽象方法：有时间片的启动线程
     @Override

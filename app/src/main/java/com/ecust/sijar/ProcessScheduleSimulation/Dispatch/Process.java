@@ -23,17 +23,8 @@ public class Process implements Cloneable{
     private int endTime;         //进程结束时间  ，可以不要  RR
     private int processrunning=0;        //用来判断什么时候设置真实开始时间的
 
-/**
- *
- *
     //先来先服务算法创建进程
-    public Process(String name,int startTime,int  CPUTime,int IOstartTime,int IOtime){
-        this.name = name;
-        this.startTime=startTime;
-        this.CPUTime = CPUTime;
-        this.IOstartTime=IOstartTime;
-        this.IOtime=IOtime;
-    }
+
     public Process(String name,int startTime,int CPUTime,int runTime){
         this.name = name;
         this.startTime=startTime;
@@ -41,7 +32,7 @@ public class Process implements Cloneable{
         this.runTime = runTime;
     }
 
- **/
+
     //时间片轮转算法-----重载
     public Process(String name,int startTime, int processTime,int IOstart,int IOlast){
         this.name = name;

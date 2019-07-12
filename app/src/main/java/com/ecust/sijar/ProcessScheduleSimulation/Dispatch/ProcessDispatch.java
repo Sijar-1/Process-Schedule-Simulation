@@ -22,11 +22,12 @@ public abstract class ProcessDispatch {
     protected int time;
     protected LinkedList<Process> list;   //所有进程的队列
     protected List<Process> listRR;   // 时间片轮转算法 所有进程的数组
+    protected List<Process> listf;   //先来先服务的
 
-    // 抽象方法：启动线程
+    // 抽象方法：启动线程  优先级的
     public abstract void startThread(LinkedList<Process> l);
-
-
+//先来先服务的
+    public abstract void startThread(List<Process> l);
     // 抽象方法：有时间片的启动线程
     public abstract void startThread(List<Process> l,int slot);
 

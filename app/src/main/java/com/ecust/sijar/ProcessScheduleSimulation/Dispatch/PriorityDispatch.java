@@ -178,6 +178,8 @@ public class PriorityDispatch extends ProcessDispatch {
         });
         thread.start();
     }//startThread()-end
+    @Override
+    public void startThread(List<Process> l){return;}
 
     //抽象方法：时间片启动线程,不用管
     @Override

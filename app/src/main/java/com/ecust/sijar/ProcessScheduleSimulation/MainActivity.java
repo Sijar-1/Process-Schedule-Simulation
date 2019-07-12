@@ -3,14 +3,8 @@ package com.ecust.sijar.ProcessScheduleSimulation;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-<<<<<<< HEAD
-import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.ProcessAdapter;
-
-=======
 import com.ecust.sijar.ProcessScheduleSimulation.Listener.fromMainToRR;
 import com.ecust.sijar.ProcessScheduleSimulation.Listener.rrFragmentListener;
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.fcfsFragment;
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.rrFragment;
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.priFragment;
@@ -23,16 +17,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
-<<<<<<< HEAD
-=======
 import android.text.TextUtils;
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
+
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 import android.widget.ListView;
@@ -40,25 +32,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-=======
-import android.widget.Toast;
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
-
 public class MainActivity extends AppCompatActivity implements rrFragmentListener {
     private fcfsFragment fcfsFragment;
     private priFragment priFragment;
 
-<<<<<<< HEAD
-
-
-=======
     //时间片轮转算法
     final rrFragment mrrFragment = new rrFragment();
     private fromMainToRR mfromMainToRR;
 
     //绑定监听器，实现点击底部三个按钮“时间片轮转”，“先来先服务”，“优先级” 切换对应的界面（Fragment）
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -82,13 +65,6 @@ public class MainActivity extends AppCompatActivity implements rrFragmentListene
         }
     };
 
-<<<<<<< HEAD
-    //init（）用来初始化组件
-    private void init(){
-        fragmentOne=new rrFragment();
-        fcfsFragment =new fcfsFragment();
-        priFragment =new priFragment();
-=======
     /**
      * 函数名：void onCreate(Bundle savedInstanceState)
      * 作用：是在Activity创建时被系统调用，是一个Activity生命周期的开始；
@@ -103,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements rrFragmentListene
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+
+
+
+
+
     /**
      * 函数名：void init()
      * 作用：用来初始化组件，并设置时间片轮转算法页面为APP打开显示的页面
@@ -115,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements rrFragmentListene
 
         fcfsFragment = new fcfsFragment();
         priFragment = new priFragment();
->>>>>>> 357b8dee35ec32866a26cc0e5babc8535f476a57
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.content, mrrFragment).add(R.id.content, fcfsFragment).add(R.id.content, priFragment);//开启一个事务将fragment动态加载到组件
@@ -156,19 +136,6 @@ public class MainActivity extends AppCompatActivity implements rrFragmentListene
                 break;
         }
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        init();
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
-    }
-
-
 
     /**
      * 函数名：vbtnFunc(String btn, String content)
