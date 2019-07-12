@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="进程名"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_priority"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="优先级"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_needtime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="需要时间"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_runtime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="已运行时间"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="状态"
+        android:layout_weight="1"/>
 
 </LinearLayout>

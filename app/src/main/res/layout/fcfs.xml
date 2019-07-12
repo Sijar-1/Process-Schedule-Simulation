@@ -53,11 +53,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="时间片:"
-                android:textSize="18sp"/>
+
 
             <EditText
                 android:id="@+id/et_slot"
@@ -68,29 +64,26 @@
                 android:enabled="false"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(单位:秒)"/>
+
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_chartpri"
+            android:id="@+id/btn_stopfcfs"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/btn_login_selector"
-            android:text="更改"
+            android:text="暂停"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
 
         <Button
-            android:id="@+id/btn_resetpri"
+            android:id="@+id/btn_resetfcfs"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/btn_chartpri"
+            android:layout_below="@id/btn_stopfcfs"
             android:background="@drawable/btn_login_selector"
             android:text="重置"
             android:textColor="#ffffff"
@@ -99,12 +92,12 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/list_titlepri"
+        layout="@layout/list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <ListView
-        android:id="@+id/lv_process"
+        android:id="@+id/lv_processfcfs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -117,7 +110,7 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/btn_addpri"
+            android:id="@+id/btn_addfcfs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -128,7 +121,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btn_startpri"
+            android:id="@+id/btn_startfcfs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

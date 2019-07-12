@@ -26,6 +26,12 @@ public class Process implements Cloneable{
         this.startTime=startTime;
         this.runTime = runTime;
     }
+    public Process(String name,int startTime,int CPUTime,int runTime){
+        this.name = name;
+        this.startTime=startTime;
+        this.CPUTime = CPUTime;
+        this.runTime = runTime;
+    }
 
     public Process(int round,String name,int startTime,int runTime){
         this.name = name;
@@ -66,6 +72,13 @@ public class Process implements Cloneable{
     }
     public void setRunTime(int runTime) {
         this.runTime = runTime;
+    }
+
+    public int getNeedTime() {
+        return CPUTime;
+    }
+    public void setNeedTime(int needTime) {
+        this.CPUTime = needTime;
     }
 
     public int getCPUTime() {
@@ -127,7 +140,7 @@ public class Process implements Cloneable{
     public List<Process> getNext() { return next; }
     public void setNext(List<Process> next) { this.next = next; }
     @Override
-    protected Process clone() throws CloneNotSupportedException {
+    public Process clone() throws CloneNotSupportedException {
         try {
             Process p = (Process) super.clone();
             p.name = this.name;

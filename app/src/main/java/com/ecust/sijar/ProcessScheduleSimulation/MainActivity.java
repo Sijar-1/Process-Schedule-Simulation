@@ -3,10 +3,13 @@ package com.ecust.sijar.ProcessScheduleSimulation;
 
 import android.os.Bundle;
 
+import com.ecust.sijar.ProcessScheduleSimulation.Dispatch.ProcessAdapter;
+
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.fcfsFragment;
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.rrFragment;
 import com.ecust.sijar.ProcessScheduleSimulation.fragment.priFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -14,12 +17,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.content.DialogInterface;
+import android.app.AlertDialog;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
     private rrFragment fragmentOne;
     private fcfsFragment fcfsFragment;
     private priFragment priFragment;
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,18 +60,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        init();
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
-
 
     //init（）用来初始化组件
     private void init(){
@@ -95,6 +100,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+    }
+
 
 }
 
